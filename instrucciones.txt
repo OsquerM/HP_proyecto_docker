@@ -1,4 +1,6 @@
 Conexión a MariaDB
 mysql -u root -p
 
+Activar el entorno virtual:
+source venv\Scripts\activate
 
