@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Entornos virtuales
+venv/
+.env
+*.env
+
+# Docker
+*.dockerignore
+
+# Editor y OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db__pycache__/
+*.pyc
