@@ -41,10 +41,22 @@ def login_form(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
 
 @admin_router.post("/login")
-def login(username: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
+def login(
+    request: Request,
+    username: str = Form(...),
+    password: str = Form(...),
+    db: Session = Depends(get_db)
+):
     admin = db.query(models.Usuario).filter_by(nombre=username, rol="admin").first()
     if not admin or not verify_password(password, admin.password):
-        return RedirectResponse("/admin/login", status_code=303)
+        # Renderizamos el login con mensaje de error
+        return templates.TemplateResponse(
+            "login.html",
+            {
+                "request": request,
+                "error": "Usuario o contraseña incorrectos"
+            }
+        )
     response = RedirectResponse("/admin", status_code=303)
     response.set_cookie(key="admin_logged_in", value="true")
     return response

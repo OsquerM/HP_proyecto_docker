@@ -9,6 +9,12 @@
 <body>
     <div class="login-box">
         <h1>Admin Login</h1>
+
+        <!-- Mensaje de error -->
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% endif %}
+
         <form action="/admin/login" method="post">
             <input type="text" name="username" placeholder="Usuario" required><br>
             <input type="password" name="password" placeholder="Contraseña" required><br>
