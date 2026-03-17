@@ -1,0 +1,16 @@
+cd HP_Proyecto_Docker
+
+# Crear y activar entorno virtual
+python -m venv venv
+source venv/Scripts/activate   # Git Bash
+# o venv\Scripts\activate      # CMD/PowerShell
+
+# Instalar dependencias
+pip install -r requirements.txt
+
+# Probar tests
+python -m pytest -v
+
+# Levantar proyecto con Docker
+docker-compose build
+docker-compose up
