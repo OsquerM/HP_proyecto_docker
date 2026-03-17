@@ -1,4 +1,13 @@
 # Manual Técnico
+**Versión del proyecto:** 1.0  
+**Fecha:** 2026  
+**Tecnologías principales:**  
+- Backend: FastAPI (Python)  
+- Frontend: HTML5 + CSS3 + JavaScript vanilla  
+- Base de datos: SQLite (desarrollo) / MariaDB (Docker)  
+- ORM: SQLAlchemy  
+- Plantillas: Jinja2  
+- Contenedores: Docker + Docker Compose  
 ## Proyecto: Sistema de Selección de Casas - Harry Potter
 Autor: Óscar Manuel Benito Martín
 Tecnologías: FastAPI, Jinja2, SQLAlchemy, SQLite, HTML, CSS
@@ -131,3 +140,43 @@ Se recomienda implementar:
 ```uvicorn app.main:app --reload```
 ## Acceso a la url
 ```http://127.0.0.1:8000```
+
+## 10. Despliegue con Docker
+
+El proyecto incluye soporte completo para Docker.
+
+### Requisitos
+
+- Docker y Docker Compose instalados
+
+### Comandos principales
+
+Desde la raíz del proyecto:
+
+- Construir y levantar (recomendado la primera vez)
+docker compose up --build -d
+
+- Detener
+docker compose down
+
+- Detener y borrar datos de BD (cuidado!)
+docker compose down -v
+
+- Ver logs de la aplicación
+docker compose logs hp_quiz_app -f
+
+- Entrar al contenedor
+docker compose exec hp_quiz_app bash
+
+## Acceso 
+Quiz: http://localhost:8000/quiz
+Admin: http://localhost:8000/admin/login (usuario: admin / contraseña: 1234 o la configurada)
+
+## 11. Pruebas realizadas
+
+- Login admin → OK (credenciales correctas / incorrectas)
+- Agregar pregunta con y sin imagen → OK
+- Editar y eliminar pregunta/respuesta → OK
+- Realizar quiz completo → OK (calcula casa por mayoría)
+- Visualización de imágenes → en .jpg, .png, .webp 
+- Compatibilidad: Chrome, Edge (probado)

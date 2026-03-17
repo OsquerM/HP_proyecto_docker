@@ -1,59 +1,52 @@
- body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .login-box {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-            width: 350px;
-            text-align: center;
-        }
-        .login-box h1 {
-            margin-bottom: 20px;
-        }
-        .login-box input {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .login-box button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #4B0082;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .login-box button:hover {
-            background-color: #301060;
-        }
-        .volver-button {
-            display: inline-block;
-            width: 90%;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #777;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.login-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    width: 350px;
+    text-align: center;
+}
+.login-box h1 {
+    margin-bottom: 20px;
+}
+.login-box input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.login-box button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4B0082;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.login-box button:hover {
+    background-color: #301060;
+}
 
-        .volver-button:hover {
-            background-color: #555;
-        }
-        .error-message {
-            color: #ff5555;
-            font-weight: bold;
-            margin-bottom: 15px;
-            text-align: center;
-        }
+/* Botón volver */
+.login-box a {
+    display: block;
+    margin-top: 15px;
+    text-decoration: none;
+}
+.login-box a button {
+    background-color: #4B0082;
+    width: auto;
+}
+.login-box a button:hover {
+    background-color: #301060;
+}

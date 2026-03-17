@@ -1,34 +1,38 @@
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+import time
 
-# 🔹 Configuración de conexión
-# usuario: root
-# contraseña: '' (vacío por defecto en XAMPP)
-# host: localhost
-# puerto: 3306 (default MySQL/MariaDB)
-# base de datos: harryquiz
-SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:@localhost:3306/harryquiz"
+DB_USER = os.getenv("DB_USER", "hpuser")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "hppassword")
+DB_HOST = os.getenv("DB_HOST", "hp_mariadb")
+DB_PORT = os.getenv("DB_PORT", "3306")
+DB_NAME = os.getenv("DB_NAME", "harryquiz")
 
-# 🔹 Motor de conexión
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL,
-    echo=True,
-    pool_pre_ping=True,   # evita errores de conexión muerta
-    pool_recycle=3600,    # recicla conexiones cada 1 hora
-    future=True           # compatibilidad moderna SQLAlchemy
-)
+SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-# 🔹 Sesión
-SessionLocal = sessionmaker(
-    autocommit=False,
-    autoflush=False,
-    bind=engine
-)
+engine = None
+while True:
+    try:
+        engine = create_engine(
+            SQLALCHEMY_DATABASE_URL,
+            echo=True,
+            pool_pre_ping=True,
+            pool_recycle=3600,
+            future=True
+        )
+        conn = engine.connect()
+        conn.close()
+        print("✅ Base de datos lista")
+        break
+    except Exception as e:
+        print("⏳ Esperando a que MariaDB esté lista...", e)
+        time.sleep(2)
 
-# 🔹 Base para modelos
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
 Base = declarative_base()
 
-# 🔹 Función para obtener sesión
 def get_db():
     db = SessionLocal()
     try:

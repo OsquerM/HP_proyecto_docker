@@ -41,16 +41,29 @@ body {
 /* ===================== Niebla ===================== */
 .fog {
     position: fixed;
-    width: 200%;
+    width: 100%;
     height: 100%;
-    background: url("https://i.imgur.com/8IhQ5Qb.png");
-    opacity: 0.2;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, transparent 70%);
     animation: fogMove 60s linear infinite;
     z-index: -2;
 }
 
-.fog1 { animation-duration: 60s; }
-.fog2 { animation-duration: 90s; opacity: 0.15; }
+.fog1 {
+    animation-duration: 60s;
+    opacity: 0.3;
+}
+
+.fog2 {
+    animation-duration: 90s;
+    opacity: 0.15;
+    background: radial-gradient(ellipse at bottom, rgba(255,255,255,0.08) 0%, transparent 60%);
+}
+
+@keyframes fogMove {
+    0% { transform: translateX(0) translateY(0); }
+    50% { transform: translateX(2%) translateY(1%); }
+    100% { transform: translateX(0) translateY(0); }
+}
 
 @keyframes fogMove {
     from { transform: translateX(0); }
