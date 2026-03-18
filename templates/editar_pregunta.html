@@ -8,7 +8,7 @@
 <body>
     <h1>Editar Pregunta</h1>
 
-    <form action="/admin/actualizar_pregunta/{{ pregunta.id }}" method="post" enctype="multipart/form-data">
+    <form action="/admin/editar_pregunta/{{ pregunta.id }}" method="post" enctype="multipart/form-data">
         <label>Texto de la pregunta:</label>
         <input type="text" name="texto_pregunta" value="{{ pregunta.texto_pregunta }}" required><br><br>
 

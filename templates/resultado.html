@@ -3,19 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>¡Felicidades!</title>
-    <link rel="stylesheet" href="/static/css/resultado.css">
+    <link rel="stylesheet" href="/static/css/resultado.css?v=2">
+    <script src="/static/js/quiz.js" defer></script>
 </head>
+
 <body>
 
 <div class="container">
     <h1>¡Felicidades, {{ nombre }}!</h1>
     <p>Has sido asignado a <strong>{{ casa }}</strong> 🏰</p>
 
-    <img src="/static/{{ imagen_casa }}" alt="{{ casa }}" class="casa-img">
+    <div class="resultado-grid">
+        <!-- Columna izquierda: imagen de la casa -->
+        <div class="columna-casa">
+            <img src="/static/{{ imagen_casa }}" alt="{{ casa }}" class="casa-img">
+            <p><strong>{{ casa }}</strong></p>
+        </div>
 
-    <br><br>
+        <!-- Columna derecha: personaje de HP-API -->
+        <div class="columna-personaje" id="personaje-container"></div>
+    </div>
+
     <a href="/quiz" class="restart-button">Volver a hacer el quiz</a>
 </div>
+
+<!-- Variable inyectada por Jinja2 para que quiz.js pueda leer la casa -->
+<script>
+    const CASA_ASIGNADA = "{{ casa }}";
+</script>
 
 </body>
 </html>

@@ -29,6 +29,7 @@ services:
       DB_USER: hpuser
       DB_PASSWORD: hppassword
       DB_NAME: harryquiz
-
+    volumes:
+      - ./static/uploads:/app/static/uploads
 volumes:
   db_data:

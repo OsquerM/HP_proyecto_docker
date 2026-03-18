@@ -30,6 +30,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 admin_router = APIRouter(prefix="/admin", tags=["admin"])
 
+# ✅ CORREGIDO: compara con "true" (igual que lo que guarda el login)
 def get_current_admin(admin_logged_in: str | None = Cookie(None)):
     if admin_logged_in != "true":
         raise HTTPException(
@@ -57,9 +58,9 @@ async def login(
     response = RedirectResponse("/admin", status_code=303)
     response.set_cookie(
         key="admin_logged_in",
-        value="true",
+        value="true",  # ✅ consistente con get_current_admin
         httponly=True,
-        secure=False,  # Cambia a True en producción
+        secure=False,
         samesite="lax",
         max_age=86400
     )
@@ -84,7 +85,7 @@ async def mostrar_admin(
         {"request": request, "preguntas": preguntas}
     )
 
-# Agregar pregunta (validación amplia para imágenes)
+# Agregar pregunta
 @admin_router.post("/agregar_pregunta")
 async def agregar_pregunta(
     texto_pregunta: str = Form(...),
@@ -120,29 +121,19 @@ async def agregar_pregunta(
         ruta_bd = None
         if archivo and archivo.filename and archivo.filename.strip():
             content_type = archivo.content_type or ""
-            
-            # Lista amplia de tipos de imagen reales
             allowed_types = {
-                "image/jpeg", "image/jpg",
-                "image/png",
-                "image/gif",
-                "image/webp",
-                "image/avif",
-                "image/heic", "image/heif",
-                "image/bmp",
-                "image/tiff", "image/tif",
-                "image/svg+xml",
+                "image/jpeg", "image/jpg", "image/png", "image/gif",
+                "image/webp", "image/avif", "image/heic", "image/heif",
+                "image/bmp", "image/tiff", "image/tif", "image/svg+xml",
             }
 
             if not content_type.startswith("image/") or content_type not in allowed_types:
                 db.rollback()
-                raise HTTPException(
-                    400,
-                    f"Tipo de archivo no permitido: {content_type}. "
-                    f"Solo se aceptan imágenes reales (jpg, jpeg, png, gif, webp, avif, heic, bmp, tiff, svg)."
-                )
+                raise HTTPException(400, f"Tipo de archivo no permitido: {content_type}.")
 
-            nombre_archivo = f"{uuid.uuid4().hex}_{archivo.filename}"
+            # ✅ Nombre limpio: UUID + extensión, sin acumular nombres
+            extension = Path(archivo.filename).suffix
+            nombre_archivo = f"{uuid.uuid4().hex}{extension}"
             ruta_guardado = UPLOAD_DIR / nombre_archivo
 
             try:
@@ -232,12 +223,11 @@ async def actualizar_pregunta(
             }
 
             if not content_type.startswith("image/") or content_type not in allowed_types:
-                raise HTTPException(
-                    400,
-                    f"Tipo no permitido: {content_type}. Solo imágenes reales."
-                )
+                raise HTTPException(400, f"Tipo no permitido: {content_type}.")
 
-            nombre_archivo = f"{uuid.uuid4().hex}_{archivo.filename}"
+            # ✅ Nombre limpio: UUID + extensión, sin acumular nombres
+            extension = Path(archivo.filename).suffix
+            nombre_archivo = f"{uuid.uuid4().hex}{extension}"
             ruta_guardado = UPLOAD_DIR / nombre_archivo
 
             try:
@@ -246,6 +236,8 @@ async def actualizar_pregunta(
                 respuesta_actual.imagen = f"uploads/{nombre_archivo}"
             except Exception as e:
                 raise HTTPException(500, f"Error guardando imagen: {str(e)}")
+        # ✅ Si no se sube imagen nueva, se conserva la antigua automáticamente
+        # porque no tocamos respuesta_actual.imagen
 
     db.commit()
     return RedirectResponse("/admin?success=pregunta_actualizada", status_code=303)

@@ -4,8 +4,9 @@ body {
     font-family: 'Cinzel', serif;
     background: black;
     color: white;
-    overflow: hidden;
+    overflow-y: auto;
     text-align: center;
+    min-height: 100vh;
 }
 
 /* ===================== Fondo / Efecto mágico ===================== */
@@ -46,40 +47,57 @@ body::before {
     100% { transform: translateX(0) translateY(0); }
 }
 
-@keyframes fogMove {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-}
-/* ===================== Contenedor ===================== */
+/* ===================== Contenedor principal ===================== */
 .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
     text-align: center;
-    padding: 30px 50px;
+    padding: 20px 40px;
     background: rgba(0,0,0,0.6);
     border-radius: 15px;
     box-shadow: 0 0 20px gold;
+    max-width: 900px;
+    margin: 30px auto;
+    box-sizing: border-box;
 }
 
 /* ===================== Títulos ===================== */
 h1 {
-    font-size: 48px;
+    font-size: 32px;
     color: gold;
     text-shadow: 0 0 10px orange, 0 0 20px gold;
+    margin-bottom: 20px;
 }
 
 p {
-    font-size: 24px;
+    font-size: 18px;
     margin-top: 10px;
+}
+
+/* ===================== Layout dos columnas ===================== */
+.resultado-grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.columna-casa,
+.columna-personaje {
+    flex: 1;
+    min-width: 200px;
+    max-width: 320px;
+    text-align: center;
 }
 
 /* ===================== Imagen de la casa ===================== */
 .casa-img {
-    width: 300px;
-    max-width: 80%;
-    margin: 20px 0;
+    width: 180px;
+    height: 250px;
+    object-fit: cover;
+    max-width: 100%;
+    margin: 10px 0;
     border-radius: 10px;
     box-shadow: 0 0 20px gold;
 }
@@ -87,6 +105,7 @@ p {
 /* ===================== Botón reinicio ===================== */
 .restart-button {
     display: inline-block;
+    margin-top: 25px;
     padding: 12px 25px;
     font-size: 20px;
     color: white;

@@ -14,6 +14,9 @@ class Usuario(Base):
     rol = Column(String(20), default="usuario")    # 'admin' o 'usuario'
     casa = Column(String(20), nullable=True)       # casa asignada al jugador
 
+    def es_admin(self):
+        return self.rol == "admin"
+
 # ========================
 # Modelo Pregunta
 # ========================
@@ -29,6 +32,8 @@ class Pregunta(Base):
         back_populates="pregunta",
         cascade="all, delete-orphan"
     )
+    def total_respuestas(self):
+        return len(self.respuestas)
 
 # ========================
 # Modelo Respuesta
@@ -44,3 +49,6 @@ class Respuesta(Base):
 
     # Relación inversa con pregunta
     pregunta = relationship("Pregunta", back_populates="respuestas")
+
+    def tiene_imagen(self):
+        return self.imagen is not None

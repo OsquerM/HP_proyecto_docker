@@ -15,18 +15,32 @@
     <form id="quizForm">
 
         <label for="usuario">Nombre:</label>
-        <input type="text" id="usuario" required><br><br>
+        <input 
+            type="text" 
+            id="usuario" 
+            name="usuario"
+            required 
+            aria-label="Nombre del jugador"
+        >
+        <br><br>
 
-        <div id="preguntas"></div>
+        <div id="preguntas" aria-live="polite"></div>
 
         <button type="submit">Enviar Respuestas</button>
 
     </form>
 
-    <!-- Botón Volver al inicio - debajo a la izquierda -->
-    <button class="back-btn" onclick="window.location.href = '/'">Volver al inicio</button>
+    <!-- Botón Volver al inicio -->
+    <button 
+        class="back-btn" 
+        onclick="window.location.href = '/'"
+        aria-label="Volver al inicio"
+    >
+        Volver al inicio
+    </button>
     
-    <div id="resultado"></div>
+    <!-- Zona de mensajes -->
+    <div id="resultado" aria-live="polite"></div>
 
 </body>
 </html>

@@ -216,3 +216,65 @@ button:active {
     top: 0;
     z-index: 1000;
 }
+/* ===================== Selección de opción (JS) ===================== */
+
+.opcion.seleccionada {
+    border: 2px solid gold;
+    background: rgba(255,215,0,0.15);
+    box-shadow: 0 0 20px gold;
+}
+
+/* ===================== Focus accesibilidad ===================== */
+
+input:focus,
+button:focus {
+    outline: 2px solid gold;
+    outline-offset: 2px;
+}
+
+/* ===================== Feedback input válido/incorrecto ===================== */
+
+input[type="text"]:invalid {
+    border: 2px solid red;
+}
+
+input[type="text"]:valid {
+    border: 2px solid green;
+}
+
+/* ===================== Responsive (multi-dispositivo) ===================== */
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 35px;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    .opcion img {
+        height: 100px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* ===================== Animación suave ===================== */
+
+.pregunta {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
