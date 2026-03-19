@@ -30,7 +30,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 admin_router = APIRouter(prefix="/admin", tags=["admin"])
 
-# ✅ CORREGIDO: compara con "true" (igual que lo que guarda el login)
+# CORREGIDO: compara con "true" (igual que lo que guarda el login)
 def get_current_admin(admin_logged_in: str | None = Cookie(None)):
     if admin_logged_in != "true":
         raise HTTPException(
@@ -225,7 +225,7 @@ async def actualizar_pregunta(
             if not content_type.startswith("image/") or content_type not in allowed_types:
                 raise HTTPException(400, f"Tipo no permitido: {content_type}.")
 
-            # ✅ Nombre limpio: UUID + extensión, sin acumular nombres
+            # Nombre limpio: UUID + extensión, sin acumular nombres
             extension = Path(archivo.filename).suffix
             nombre_archivo = f"{uuid.uuid4().hex}{extension}"
             ruta_guardado = UPLOAD_DIR / nombre_archivo
@@ -236,7 +236,7 @@ async def actualizar_pregunta(
                 respuesta_actual.imagen = f"uploads/{nombre_archivo}"
             except Exception as e:
                 raise HTTPException(500, f"Error guardando imagen: {str(e)}")
-        # ✅ Si no se sube imagen nueva, se conserva la antigua automáticamente
+        # Si no se sube imagen nueva, se conserva la antigua automáticamente
         # porque no tocamos respuesta_actual.imagen
 
     db.commit()

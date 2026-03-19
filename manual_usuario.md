@@ -1,79 +1,86 @@
-# 📗 MANUAL DE USUARIO  
+# 📗 MANUAL DE USUARIO
 ## Sistema de Selección de Casa - Harry Potter
 
 ---
 
 ## 1. Introducción
 
-Esta aplicación permite:
+Esta aplicación web te permite descubrir a qué casa de Hogwarts perteneces mediante un test de preguntas. También incluye un panel de administración para gestionar el contenido del quiz.
 
-- Realizar un test para descubrir tu casa de Hogwarts (Gryffindor, Slytherin, Ravenclaw o Hufflepuff).  
-- Administrar preguntas y respuestas desde un panel de administración (solo accesible para admins).
+Las casas posibles son:
+- 🦁 **Gryffindor**
+- 🐍 **Slytherin**
+- 🦅 **Ravenclaw**
+- 🦡 **Hufflepuff**
 
 ---
 
 ## 2. Cómo Realizar el Test (Usuarios normales)
 
-1. Accede a la página principal: http://127.0.0.1:8000/quiz  
-2. Lee cada pregunta con atención.  
-3. Selecciona **una respuesta** por cada pregunta (obligatorio).  
-4. Escribe tu nombre en el campo correspondiente.  
-5. Pulsa el botón **"Enviar Respuestas"**.  
-6. Espera un segundo... ¡y verás tu casa de Hogwarts asignada!
+1. Accede a la página del quiz: **http://localhost:8000/quiz**
+2. Lee cada pregunta con atención.
+3. Selecciona **una respuesta** por cada pregunta (obligatorio).
+4. Escribe tu nombre en el campo correspondiente (mínimo 3 caracteres).
+5. Pulsa el botón **"Enviar Respuestas"**.
+6. Espera un momento... ¡y verás tu casa de Hogwarts asignada junto a un personaje famoso de esa casa!
 
 ---
 
-## 3. Panel de Administración (Solo para administradores)
+## 3. Página de Resultado
+
+Tras enviar el test verás:
+
+- Tu nombre y la casa asignada.
+- La imagen del escudo de tu casa.
+- Un personaje famoso de esa casa (obtenido en tiempo real desde una API de Harry Potter).
+- Un botón para **volver a hacer el quiz**.
+
+---
+
+## 4. Panel de Administración (Solo para administradores)
 
 Para acceder:  
-**http://127.0.0.1:8000/admin/login**
+**http://localhost:8000/admin/login**
 
-Usuario por defecto: `admin`  
-Contraseña por defecto: `1234` (cámbiala en el script `crear_admin.py` o en la base de datos)
+- **Usuario:** `admin`
+- **Contraseña:** la configurada al crear el usuario admin
 
 Desde el panel puedes:
 
-- Ver todas las preguntas existentes  
-- Crear nuevas preguntas  
-- Editar preguntas y respuestas  
-- Eliminar preguntas o respuestas individuales  
-- Subir imágenes para cada respuesta (opcional)
+- Ver todas las preguntas existentes con sus respuestas.
+- Crear nuevas preguntas.
+- Editar preguntas y sus respuestas.
+- Eliminar preguntas completas.
+- Subir imágenes para cada respuesta (opcional).
 
 ---
 
-## 4. Crear una Pregunta (Admin)
+## 5. Crear una Pregunta (Admin)
 
-1. Entra al panel de administración.  
-2. Rellena el campo **"Texto de la pregunta"**.  
-3. Añade al menos una respuesta (texto + casa asociada).  
-4. Opcional: sube una imagen para cada respuesta (formatos recomendados: JPG, PNG, WebP).  
-5. Pulsa **"Agregar Pregunta"**.
-
----
-
-## 5. Editar una Pregunta (Admin)
-
-1. En el panel, pulsa el botón **"Editar"** junto a la pregunta deseada.  
-2. Modifica el texto de la pregunta o de las respuestas.  
-3. Cambia la casa asociada si es necesario.  
-4. Sube una nueva imagen si quieres reemplazar la actual (opcional).  
-5. Pulsa **"Actualizar Pregunta"** para guardar.
+1. Entra al panel de administración.
+2. Rellena el campo **"Texto de la pregunta"** (mínimo 5 caracteres).
+3. Rellena las 4 respuestas, indicando para cada una:
+   - **Texto** de la respuesta.
+   - **Casa** asociada (Gryffindor, Slytherin, Ravenclaw o Hufflepuff).
+   - **Imagen** opcional (formatos: JPG, PNG, WebP, AVIF).
+4. Pulsa **"Agregar Pregunta"**.
 
 ---
 
-## 6. Editar una Respuesta Individual (Admin)
+## 6. Editar una Pregunta (Admin)
 
-1. En el panel, busca la respuesta dentro de la pregunta.  
-2. Pulsa **"Editar Respuesta"**.  
-3. Modifica el texto, la casa o la imagen.  
-4. Guarda los cambios.
+1. En el panel, pulsa el botón **"Editar"** junto a la pregunta deseada.
+2. Modifica el texto de la pregunta o de cualquiera de las respuestas.
+3. Cambia la casa asociada si es necesario.
+4. Sube una nueva imagen si quieres reemplazar la actual (si no subes ninguna, se conserva la imagen anterior).
+5. Pulsa **"Actualizar Pregunta"** para guardar los cambios.
 
 ---
 
-## 7. Eliminar Pregunta o Respuesta (Admin)
+## 7. Eliminar una Pregunta (Admin)
 
-1. En el panel, pulsa el botón **"Eliminar Pregunta"** o **"Eliminar"** junto a la respuesta.  
-2. Confirma la acción (si el navegador pregunta).  
+1. En el panel, pulsa el botón **"Eliminar"** junto a la pregunta.
+2. La acción se ejecuta inmediatamente.
 
 ⚠ **Atención:** Esta acción **no se puede deshacer**. La pregunta y todas sus respuestas se borrarán permanentemente de la base de datos.
 
@@ -81,31 +88,34 @@ Desde el panel puedes:
 
 ## 8. Subida de Imágenes (Admin)
 
-- Formatos recomendados: **JPG, JPEG, PNG, WebP** (más compatibles).  
-- También se aceptan: AVIF, HEIC, BMP, TIFF, SVG (pero pueden no verse en navegadores antiguos).  
-- Las imágenes se guardan automáticamente en el servidor.  
+- Formatos recomendados: **JPG, JPEG, PNG, WebP** (máxima compatibilidad).
+- También se aceptan: AVIF, HEIC, BMP, TIFF, SVG.
+- Las imágenes se guardan automáticamente en el servidor y persisten aunque se reinicie el sistema.
 - Se muestran junto a cada respuesta en el test.
 
 ---
 
-## 9. Recomendaciones para mejores resultados
+## 9. Recomendaciones para Mejores Resultados
 
-- Responde todas las preguntas para obtener un resultado preciso.  
-- Usa nombres reales o divertidos (solo se muestra en el resultado).  
-- En el panel admin: evita preguntas sin respuestas o con casas repetidas.  
-- Usa imágenes cuadradas o rectangulares pequeñas para mejor visualización.  
-- Si usas móvil: prueba en modo horizontal para ver mejor las opciones.
+- Responde **todas las preguntas** para obtener un resultado preciso.
+- Escribe un nombre de al menos 3 caracteres.
+- En el panel admin: asegúrate de que cada pregunta tenga exactamente **4 respuestas** con casas diferentes.
+- Usa imágenes de tamaño moderado para una mejor visualización.
+- Usa un navegador moderno (Chrome o Edge recomendados).
 
 ---
 
 ## 10. Problemas Comunes y Soluciones
 
-- **No veo las preguntas en el quiz** → Asegúrate de haber agregado al menos una pregunta desde el panel admin.  
-- **Imagen no carga** → Verifica que el archivo tenga formato válido y que el navegador sea moderno (Chrome/Edge recomendado).  
-- **Error al enviar respuestas** → Asegúrate de responder todas las preguntas y escribir un nombre.  
-- **Login admin falla** → Credenciales por defecto: admin / 1234. Si cambiaste la contraseña, revísala en la base de datos.  
-- **El servidor no responde** → Comprueba que el contenedor Docker esté corriendo (`docker compose ps`).
+| Problema | Solución |
+|----------|----------|
+| No se ven preguntas en el quiz | Agrega al menos una pregunta desde el panel admin |
+| Una imagen no carga | Verifica que el formato sea válido (JPG, PNG, WebP) |
+| Error al enviar respuestas | Asegúrate de responder todas las preguntas y escribir un nombre |
+| Login admin falla | Verifica usuario y contraseña. Si la olvidaste, consúltala en la base de datos |
+| El servidor no responde | Comprueba que Docker esté corriendo: `docker compose ps` |
+| No aparece el personaje de la casa | La API externa puede tardar hasta 30 segundos en responder la primera vez |
 
 ---
 
-¡Disfruta descubriendo tu casa de Hogwarts! 🪄✨
+¡Disfruta descubriendo tu casa de Hogwarts!

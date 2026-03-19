@@ -18,7 +18,7 @@ class RespuestaUsuario(BaseModel):
     usuario_nombre: str
     respuestas_usuario: dict[int, int]  # {pregunta_id: respuesta_id}
 
-# Diccionario de imágenes de casas (más seguro que hardcodear en el template)
+# Diccionario de imágenes de casas
 IMAGENES_CASAS = {
     "Gryffindor": "uploads/gryffindor.jpg",
     "Slytherin": "uploads/slytherin.jpg",
@@ -94,7 +94,7 @@ def enviar_respuestas(datos: RespuestaUsuario, db: Session = Depends(get_db)):
     max_puntos = max(contador_casas.values())
     casas_maximas = [casa for casa, puntos in contador_casas.items() if puntos == max_puntos]
 
-    # Elegir una (puedes randomizar si quieres más diversión)
+    # Elegir una 
     casa_resultado = random.choice(casas_maximas) if len(casas_maximas) > 1 else casas_maximas[0]
 
     # Guardar en BD
@@ -109,7 +109,7 @@ def enviar_respuestas(datos: RespuestaUsuario, db: Session = Depends(get_db)):
     return {
         "usuario": usuario_nombre,
         "casa": casa_resultado,
-        "puntos": contador_casas  # opcional: para debug o mostrar estadísticas
+        "puntos": contador_casas  
     }
 
 # ============================

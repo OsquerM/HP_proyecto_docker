@@ -1,4 +1,4 @@
- // 🔹 Música
+ // Música
     const music = document.getElementById("bgMusic");
     const btn = document.getElementById("musicButton");
 

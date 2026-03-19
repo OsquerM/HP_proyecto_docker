@@ -11,6 +11,32 @@ pip install -r requirements.txt
 # Probar tests
 python -m pytest -v
 
-# Levantar proyecto con Docker
-docker-compose build
-docker-compose up
+# Levantar el proyecto (primera vez o tras cambios)
+docker compose up --build -d
+
+# Levantar sin reconstruir (si no hay cambios en el código)
+docker compose up -d
+
+# Ver estado de los contenedores
+docker compose ps
+
+# Ver logs en tiempo real
+docker compose logs hp_quiz_app -f
+
+# Reiniciar los contenedores
+docker compose restart
+
+# Parar los contenedores (sin borrar datos)
+docker compose down
+
+# Parar y borrar TODOS los datos de BD (cuidado)
+docker compose down -v
+
+# Borrar la imagen para reconstruir desde cero
+docker compose down
+docker rmi hp_proyecto_docker-hp_quiz_app
+docker compose up --build -d
+
+# Entrar dentro del contenedor
+docker exec -it hp_quiz_app bash
+

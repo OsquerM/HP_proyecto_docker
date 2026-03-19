@@ -1,35 +1,75 @@
+# Versión del formato de Docker Compose que se usa
 version: "3.9"
 
 services:
+  # ─────────────────────────────────────────────────────────────
+  # Servicio de base de datos MariaDB
+  # ─────────────────────────────────────────────────────────────
   hp_mariadb:
-    image: mariadb:11.8
-    container_name: hp_mariadb
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: harryquiz
-      MYSQL_USER: hpuser
-      MYSQL_PASSWORD: hppassword
-    ports:
-      - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
+    image: mariadb:11.8        # Usa la imagen oficial de MariaDB versión 11.8
+    container_name: hp_mariadb # Nombre del contenedor
+    restart: always            # Si el contenedor se cae, se reinicia automáticamente
 
+    environment:               # Variables de entorno que configura la BD al arrancar
+      MYSQL_ROOT_PASSWORD: rootpassword  # Contraseña del usuario root de MariaDB
+      MYSQL_DATABASE: harryquiz          # Nombre de la base de datos que se crea automáticamente
+      MYSQL_USER: hpuser                 # Usuario con acceso a esa base de datos
+      MYSQL_PASSWORD: hppassword         # Contraseña de ese usuario
+
+    ports:
+      - "3306:3306"            # Mapea el puerto 3306 del contenedor al 3306 de tu máquina
+
+    volumes:
+      - db_data:/var/lib/mysql # Los datos de MariaDB persisten aunque el contenedor se destruya
+
+  # ─────────────────────────────────────────────────────────────
+  # Servicio de la aplicación FastAPI (el quiz)
+  # ─────────────────────────────────────────────────────────────
   hp_quiz_app:
-    build: .
+    build: .                   # Construye la imagen usando el Dockerfile de la carpeta actual
     container_name: hp_quiz_app
     restart: always
+
     depends_on:
-      - hp_mariadb
-    ports:
-      - "8000:8000"
+      - hp_mariadb             # Espera a que hp_mariadb arranque antes de iniciarse
+
+    # Ya NO exponemos el puerto 8000 al exterior
+    # Solo Nginx puede acceder a la app internamente
+    expose:
+      - "8000"
+
     environment:
       DB_HOST: hp_mariadb
       DB_PORT: 3306
       DB_USER: hpuser
       DB_PASSWORD: hppassword
       DB_NAME: harryquiz
+
     volumes:
       - ./static/uploads:/app/static/uploads
+
+  # ─────────────────────────────────────────────────────────────
+  # Servicio Nginx (proxy inverso)
+  # Recibe las peticiones del usuario y las redirige a hp_quiz_app
+  # ─────────────────────────────────────────────────────────────
+  hp_nginx:
+    image: nginx:alpine        # Imagen oficial de Nginx (versión ligera)
+    container_name: hp_nginx
+    restart: always
+
+    ports:
+      - "80:80"                # Expone el puerto 80 (HTTP estándar) al exterior
+                               # Así se accede en http://localhost sin poner puerto
+
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro  # Monta nuestra configuración de Nginx
+                                                      # :ro = solo lectura
+
+    depends_on:
+      - hp_quiz_app            # Espera a que la app esté lista antes de arrancar
+
+# ─────────────────────────────────────────────────────────────
+# Volúmenes nombrados
+# ─────────────────────────────────────────────────────────────
 volumes:
   db_data:

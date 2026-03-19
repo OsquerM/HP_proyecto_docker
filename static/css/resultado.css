@@ -72,7 +72,9 @@ p {
     font-size: 18px;
     margin-top: 10px;
 }
-
+.titulo_casa{
+margin-bottom: 15px;
+}
 /* ===================== Layout dos columnas ===================== */
 .resultado-grid {
     display: flex;
@@ -83,14 +85,15 @@ p {
     margin-top: 10px;
 }
 
-.columna-casa,
-.columna-personaje {
-    flex: 1;
-    min-width: 200px;
-    max-width: 320px;
-    text-align: center;
+/* Altura fija para títulos — alinea las imágenes */
+.columna-casa h3,
+.columna-personaje h3 {
+    height: 60px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 15px;
 }
-
 /* ===================== Imagen de la casa ===================== */
 .casa-img {
     width: 180px;
