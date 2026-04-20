@@ -77,4 +77,4 @@ Proyecto funcional, estable y listo para entrega. Cumple con todos los requisito
 
 **Firma:**  
 Óscar Manuel Benito Martín  
-Marzo 2026
+2026

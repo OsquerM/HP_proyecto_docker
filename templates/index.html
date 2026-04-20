@@ -16,7 +16,7 @@
 </audio>
 
 <!-- Botón música -->
-<button id="musicButton" onclick="toggleMusic()" class="music-button">
+<button id="musicButton" class="music-button">
     🔊 Música ON
 </button>
 
@@ -38,30 +38,6 @@
     <br><br>
     <a href="/admin/login" class="admin-button">Admin</a>
 </div>
-
-<script>
-    // Música: reproducir al primer clic del usuario
-    const music = document.getElementById("bgMusic");
-    const button = document.getElementById("musicButton");
-    let playing = false;
-
-    document.body.addEventListener("click", () => {
-        if (!playing) {
-            music.play().catch(e => console.log("Autoplay bloqueado", e));
-            playing = true;
-        }
-    }, { once: true });
-
-    function toggleMusic() {
-        if (music.paused) {
-            music.play();
-            button.innerText = "🔊 Música ON";
-        } else {
-            music.pause();
-            button.innerText = "🔇 Música OFF";
-        }
-    }
-</script>
 
 </body>
 </html>
