@@ -26,11 +26,12 @@ async function cargarPreguntas() {
         const res = await fetch(`${BASE_URL}/quiz/preguntas`);
 
         // Si el servidor responde con error (ej: 404, 500), lanzamos una excepción
+        // ok es una propiedad nativa del objeto Response que viene de usar fetch()
         if (!res.ok) {
             throw new Error(`Error ${res.status}: ${res.statusText}`);
         }
 
-        // Convertimos la respuesta a JSON para poder trabajar con los datos
+        // Convertimos la respuesta JSON que manda el backend a un objeto JavaScript para poder manipular los datos y construir el HTML dinámicamente
         const data = await res.json();
         console.log("Preguntas recibidas:", data);
 
@@ -96,14 +97,15 @@ async function cargarPreguntas() {
 
                     // Quitamos la clase "seleccionada" de todas las opciones de esta pregunta
                     // para que solo quede resaltada la recién clicada
+                    //r abreviacion radio
                     document.querySelectorAll(`input[name="pregunta_${p.id}"]`).forEach(r => {
                         r.parentElement.classList.remove("seleccionada");
                     });
-
+                    //parentElement es el elemento padre
                     // Añadimos la clase "seleccionada" solo a la opción clicada
                     opcion.classList.add("seleccionada");
                 });
-
+                //Montamos todo el DOM con appendchild
                 grid.appendChild(opcion);
             });
 
@@ -147,10 +149,14 @@ if (inputUsuario) {
 
 const quizForm = document.getElementById("quizForm");
 if (quizForm) {
+    // e = evento abreviación 
     quizForm.addEventListener("submit", async function(e) {
         // Evitamos que el formulario recargue la página con su comportamiento por defecto
         e.preventDefault();
-
+        //evita que la página se recargue
+        //evita que el form se envíe “solo”
+        //te deja usar fetch() en su lugar
+        
         const usuario = document.getElementById("usuario").value.trim();
 
         // Validamos que el nombre no esté vacío antes de continuar
@@ -205,6 +211,7 @@ if (quizForm) {
 
             // Redirigimos a la página de resultado pasando nombre y casa por parámetros de URL
             window.location.href = `${BASE_URL}/quiz/resultado?nombre=${encodeURIComponent(resultado.usuario)}&casa=${encodeURIComponent(resultado.casa)}`;
+            //Convierte caracteres especiales como espacios o acentos y evitamos romper la URL y el backend 
 
         } catch (err) {
             console.error("Error:", err);
@@ -236,7 +243,7 @@ async function mostrarPersonajeCasa(casa) {
         // Convertimos la casa a minúsculas para que coincida con el formato que espera la API
         const casaApi = casa.toLowerCase();
         const res = await fetch(`https://hp-api.onrender.com/api/characters/house/${casaApi}`);
-
+        //Si no responde nos manda el error
         if (!res.ok) {
             throw new Error('Error al conectar con HP-API');
         }

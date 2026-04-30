@@ -3,62 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <title>Panel Admin - Harry Potter Quiz</title>
+    <!-- Hoja de estilos del panel admin / Admin panel stylesheet -->
     <link rel="stylesheet" href="/static/css/admin.css">
 </head>
 <body>
-    <!-- Navbar / header -->
+    <!-- Barra de navegación superior con botón de cerrar sesión -->
+    <!-- Top navigation bar with logout button -->
     <div class="admin-navbar">
         <a href="/admin/logout" class="logout-button">Cerrar sesión</a>
     </div>
 
     <h1>Panel Admin - Harry Potter Quiz</h1>
 
-    <!-- ================= AGREGAR NUEVA PREGUNTA ================= -->
-    <h2>Agregar nueva pregunta</h2>
+    <!-- Formulario para crear una nueva pregunta con sus 4 respuestas -->
+    <!-- Form to create a new question with its 4 answers -->
     <form action="/admin/agregar_pregunta" method="post" enctype="multipart/form-data">
+
         <label>Texto de la pregunta:</label>
         <input type="text" name="texto_pregunta" required><br><br>
 
+        <!-- Bucle Jinja2 que genera los 4 campos de respuesta automáticamente -->
+        <!-- Jinja2 loop that automatically generates the 4 answer fields -->
         {% for i in range(1,5) %}
             <label>Respuesta {{ i }}:</label>
             <input type="text" name="respuesta{{ i }}" required>
+
+            <!-- Selector de casa para asociar la respuesta a una casa de Hogwarts -->
+            <!-- House selector to associate the answer with a Hogwarts house -->
             <select name="casa{{ i }}">
                 <option value="Gryffindor">Gryffindor</option>
                 <option value="Slytherin">Slytherin</option>
                 <option value="Ravenclaw">Ravenclaw</option>
                 <option value="Hufflepuff">Hufflepuff</option>
             </select>
+
+            <!-- Campo opcional para subir imagen / Optional field to upload image -->
             <input type="file" name="imagen{{ i }}"><br><br>
         {% endfor %}
 
         <button type="submit">Agregar Pregunta</button>
     </form>
 
-    <!-- ================= PREGUNTAS EXISTENTES ================= -->
     <h2>Preguntas existentes</h2>
+
+    <!-- Bucle Jinja2 que recorre todas las preguntas de la BD -->
+    <!-- Jinja2 loop that iterates through all questions from the DB -->
     {% for pregunta in preguntas %}
         <div class="pregunta-admin">
             <strong>{{ pregunta.texto_pregunta }}</strong>
             
-            <!-- Botón Editar: apunta a la ruta individual -->
+            <!-- Botón Editar: redirige al formulario de edición -->
+            <!-- Edit button: redirects to the edit form -->
             <a href="/admin/editar_pregunta/{{ pregunta.id }}">Editar</a>
 
-            <!-- Botón Eliminar Pregunta -->
+            <!-- Formulario para eliminar la pregunta / Form to delete the question -->
+            <!-- input hidden: envía el id sin mostrarlo al usuario -->
+            <!-- hidden input: sends the id without showing it to the user -->
             <form action="/admin/eliminar_pregunta" method="post" style="display:inline;">
                 <input type="hidden" name="pregunta_id" value="{{ pregunta.id }}">
                 <button type="submit">Eliminar Pregunta</button>
             </form>
 
-            <!-- Respuestas de la pregunta -->
             <div class="respuestas-admin">
+                <!-- Bucle que recorre las respuestas de cada pregunta -->
+                <!-- Loop that iterates through each question's answers -->
                 {% for r in pregunta.respuestas %}
                     <div class="respuesta">
+                        <!-- Si tiene imagen la mostramos / If it has an image we display it -->
                         {% if r.imagen %}
                             <img src="/static/{{ r.imagen }}" alt="{{ r.texto_respuesta }}" width="100">
                         {% endif %}
+
+                        <!-- Texto y casa de la respuesta / Answer text and house -->
                         <p>{{ r.texto_respuesta }} ({{ r.casa }})</p>
 
-                        <!-- Botón Eliminar Respuesta -->
+                        <!-- Formulario para eliminar respuesta individual -->
+                        <!-- Form to delete an individual answer -->
                         <form action="/admin/eliminar_respuesta" method="post" style="display:inline;">
                             <input type="hidden" name="respuesta_id" value="{{ r.id }}">
                             <button type="submit">Eliminar</button>

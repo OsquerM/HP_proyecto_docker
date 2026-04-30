@@ -24,11 +24,12 @@ import uuid                                                     # Genera nombres
 # Rutas base del proyecto 
 # Así funciona tanto en local como dentro del contenedor Docker
 # resolve ruta absoluta
+#convertimos el archivo en un objeto path para poder usar sus metodos.
 #parent sube el nivel de jerarquia para que base dir apunte a la raiz del proyecto 
 #Obtenemos la carpeta raíz
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Motor de plantillas Jinja2 apuntando a la carpeta templates
+# Crea el motor de plantillas Jinja2 apuntando a la carpeta templates
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
 # Carpeta donde se guardan las imágenes subidas por el admin
@@ -40,8 +41,10 @@ UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 VALID_HOUSES = {"Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"}
 
 # Contexto de cifrado bcrypt para hashear y verificar contraseñas
+#Preparamos la herramienta
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 #Logueo en caso futuro
+#Hasheamos pass
 def hash_password(password: str) -> str:
     """Devuelve la contraseña cifrada con bcrypt"""
     return pwd_context.hash(password)
@@ -74,9 +77,12 @@ def get_current_admin(admin_logged_in: str | None = Cookie(None)):
 #async def permite que el servidor atienda otras peticiones mientras espera la respuesta de algo lento (BD, API, disco...).
 
 @admin_router.get("/login")
-async def login_form(request: Request):
+async def login_form(request: Request, error: str = None):
     """Muestra el formulario de login"""
-    return templates.TemplateResponse("login.html", {"request": request})
+    return templates.TemplateResponse("login.html", {
+        "request": request,
+        "error": error
+    })
 
 @admin_router.post("/login")
 async def login(

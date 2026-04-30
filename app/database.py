@@ -26,7 +26,7 @@ SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{D
 # CONEXIÓN CON REINTENTO 
 
 
-engine = None #variable vacía
+engine = None #inicializada en none
 
 # Bucle infinito hasta que MariaDB esté listo
 while True:

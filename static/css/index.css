@@ -5,10 +5,10 @@ body {
     font-family: 'Cinzel', serif;
     background: black;
     color: white;
-    cursor: url('/static/uploads/wand.png') 32 32, auto; /* Cursor de varita más grande, hotspot centrado */
+    cursor: url('/static/uploads/wand.png') 32 32, auto; /* Cursor de varita / Wand cursor */
 }
 
-/* ===================== Botón música ===================== */
+/* ===================== Botón música / Music button ===================== */
 .music-button {
     position: fixed;
     bottom: 20px;
@@ -17,60 +17,67 @@ body {
     color: gold;
     border: 1px solid gold;
     padding: 10px 20px;
-    cursor: url('/static/uploads/wand.png') 32 32, auto; /* Cursor sobre botón */
+    cursor: url('/static/uploads/wand.png') 32 32, auto; /* Cursor sobre botón / Cursor over button */
     border-radius: 8px;
     transition: all 0.3s ease;
 }
 
+/* Efecto hover del botón de música / Music button hover effect */
 #musicButton:hover {
     background: linear-gradient(45deg, #6b3bff, #ff3b8c);
     box-shadow: 0 0 15px rgba(255,255,255,0.7);
     transform: scale(1.1) rotate(-2deg);
 }
 
-/* ===================== Fondo Hogwarts ===================== */
+/* ===================== Fondo Hogwarts / Hogwarts background ===================== */
+/* Imagen de fondo fija con brillo reducido para que resalte el contenido */
+/* Fixed background image with reduced brightness to highlight content */
 .background {
     position: fixed;
     width: 100%;
     height: 100%;
     background: url("/static/uploads/hogwarts.jpg") center/cover no-repeat;
     filter: brightness(0.4);
-    z-index: -3;
+    z-index: -3; /* imagen de fondo */
 }
 
-/* ===================== Niebla ===================== */
+/* ===================== Niebla / Fog ===================== */
+/* Capa base de niebla con degradado circular centrado */
+/* Base fog layer with centered radial gradient */
 .fog {
     position: fixed;
     width: 100%;
     height: 100%;
     background: radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, transparent 70%);
     animation: fogMove 60s linear infinite;
-    z-index: -2;
+    z-index: -2; /* niebla encima del fondo */
 }
 
+/* Primera capa de niebla: más rápida y más visible */
+/* First fog layer: faster and more visible */
 .fog1 {
     animation-duration: 60s;
     opacity: 0.3;
 }
 
+/* Segunda capa de niebla: más lenta, más transparente y sale desde abajo */
+/* Second fog layer: slower, more transparent and rises from bottom */
 .fog2 {
     animation-duration: 90s;
     opacity: 0.15;
     background: radial-gradient(ellipse at bottom, rgba(255,255,255,0.08) 0%, transparent 60%);
 }
 
-@keyframes fogMove {
-    0% { transform: translateX(0) translateY(0); }
-    50% { transform: translateX(2%) translateY(1%); }
-    100% { transform: translateX(0) translateY(0); }
-}
-
+/* Animación de movimiento de la niebla hacia la izquierda */
+/* Fog movement animation sliding to the left */
 @keyframes fogMove {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
 }
 
-/* ===================== Canvas partículas ===================== */
+/* ===================== Canvas partículas / Particles canvas ===================== */
+/* Canvas donde se dibujan las partículas mágicas doradas */
+/* Canvas where the golden magic particles are drawn */
 #magicCanvas {
     position: fixed;
     width: 100%;
@@ -78,7 +85,9 @@ body {
     z-index: -1;
 }
 
-/* ===================== Contenido ===================== */
+/* ===================== Contenido / Content ===================== */
+/* Contenedor principal centrado en la pantalla */
+/* Main container centered on screen */
 .container {
     position: absolute;
     top: 50%;
@@ -87,7 +96,9 @@ body {
     text-align: center;
 }
 
-/* ===================== Título ===================== */
+/* ===================== Título / Title ===================== */
+/* Título con efecto de brillo dorado animado */
+/* Title with animated golden glow effect */
 .title {
     font-size: 64px;
     text-shadow:
@@ -97,19 +108,25 @@ body {
     animation: glow 2s infinite alternate;
 }
 
+/* Animación de brillo que alterna entre oro y naranja */
+/* Glow animation alternating between gold and orange */
 @keyframes glow {
     from { text-shadow: 0 0 10px gold; }
     to { text-shadow: 0 0 30px orange; }
 }
 
+/* Subtítulo con margen inferior */
+/* Subtitle with bottom margin */
 .subtitle {
     font-size: 24px;
     margin-bottom: 30px;
 }
 
-/* ===================== Botones ===================== */
+/* ===================== Botones / Buttons ===================== */
+/* Estilos base compartidos por todos los botones */
+/* Base styles shared by all buttons */
 a.start-button,
-a.admin-button,
+a.admin-button, /*Seleccionamos todos los a que tengas start-button y los admin-button*/
 #musicButton {
     background: #3b2e6c;
     color: #fff;
@@ -120,14 +137,15 @@ a.admin-button,
     transition: all 0.3s ease;
     display: inline-block;
     margin: 5px;
-    cursor: url('/static/uploads/wand.png') 32 32, auto; /* Cursor de varita sobre botones */
+    cursor: url('/static/uploads/wand.png') 32 32, auto; /* Cursor de varita sobre botones / Wand cursor over buttons */
 }
 
-/* Hover mágico */
+/* Efecto hover mágico con gradiente y rotación */
+/* Magic hover effect with gradient and rotation */
 a.start-button:hover,
 a.admin-button:hover {
     background: linear-gradient(45deg, #6b3bff, #ff3b8c);
     box-shadow: 0 0 15px rgba(255,255,255,0.7);
     transform: scale(1.1) rotate(-2deg);
-    cursor: url('/static/uploads/wand.png') 32 32, auto; /* Cursor de varita más grande */
+    cursor: url('/static/uploads/wand.png') 32 32, auto; /* Cursor de varita más grande / Larger wand cursor */
 }

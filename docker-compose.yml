@@ -5,7 +5,10 @@ services:
   # ─────────────────────────────────────────────────────────────
   # Servicio de base de datos MariaDB
   # ─────────────────────────────────────────────────────────────
+  # MariaDB — uso la imagen oficial de la versión 11.8. Le paso las credenciales mediante variables de entorno para que cree la base de datos automáticamente al arrancar. Los datos persisten gracias al volumen db_data aunque el contenedor se destruya.
+
   hp_mariadb:
+    #Image: Es una plantilla preconfigurada que contiene el sistema operativo y el software necesario.
     image: mariadb:11.8        # Usa la imagen oficial de MariaDB versión 11.8
     container_name: hp_mariadb # Nombre del contenedor
     restart: always            # Si el contenedor se cae, se reinicia automáticamente
@@ -25,6 +28,7 @@ services:
   # ─────────────────────────────────────────────────────────────
   # Servicio de la aplicación FastAPI (el quiz)
   # ─────────────────────────────────────────────────────────────
+  # FastAPI — en vez de usar una imagen descargada, la construyo desde mi Dockerfile con build: .. Le paso las credenciales de la BD mediante variables de entorno para que database.py pueda conectarse. Uso expose en vez de ports para que el puerto 8000 solo sea accesible internamente — el usuario no puede acceder directamente a la app, solo Nginx puede. Las imágenes subidas persisten gracias al volumen que monta ./static/uploads en el contenedor.
   hp_quiz_app:
     build: .                   # Construye la imagen usando el Dockerfile de la carpeta actual
     container_name: hp_quiz_app
@@ -52,6 +56,7 @@ services:
   # Servicio Nginx (proxy inverso)
   # Recibe las peticiones del usuario y las redirige a hp_quiz_app
   # ─────────────────────────────────────────────────────────────
+  #Nginx — actúa como proxy inverso. Escucha en el puerto 80 y redirige el tráfico internamente a la app. Monto mi archivo nginx.conf en el contenedor en modo solo lectura para que Nginx use mi configuración.
   hp_nginx:
     image: nginx:alpine        # Imagen oficial de Nginx (versión ligera)
     container_name: hp_nginx
@@ -73,3 +78,5 @@ services:
 # ─────────────────────────────────────────────────────────────
 volumes:
   db_data:
+
+# Los tres servicios tienen restart: always para que se reinicien automáticamente si se caen, y depends_on para que arranquen en el orden correcto — primero MariaDB, luego la app, y finalmente Nginx."

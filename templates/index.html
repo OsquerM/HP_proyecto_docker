@@ -3,39 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Harry Potter Quiz</title>
+    <!-- Hoja de estilos de la página de inicio / Home page stylesheet -->
     <link rel="stylesheet" href="/static/css/index.css">
+    <!-- Script para las partículas mágicas / Magic particles script -->
     <script src="/static/js/magic.js" defer></script>
+    <!-- Script para controlar la música / Music control script -->
     <script src="/static/js/musica.js" defer></script>
 </head>
 <body>
 
-<!-- Música -->
-<audio id="bgMusic" loop>
+<!-- ================= MÚSICA / MUSIC ================= -->
+<!-- Loop: Elemento de audio con la música de fondo en bucle -->
+<!-- Audio element with background music on loop -->
+<audio id="bgMusic" loop> 
     <source src="/static/audio/hogwarts.mp3" type="audio/mpeg">
+    <!-- Mensaje de fallback si el navegador no soporta audio -->
+    <!-- Fallback message if the browser doesn't support audio -->
     Tu navegador no soporta audio.
 </audio>
 
-<!-- Botón música -->
+<!-- Botón para activar/desactivar la música -->
+<!-- Button to toggle music on/off -->
 <button id="musicButton" class="music-button">
     🔊 Música ON
 </button>
 
-<!-- Fondo -->
+<!-- ================= EFECTOS VISUALES / VISUAL EFFECTS ================= -->
+<!-- Imagen de fondo de Hogwarts / Hogwarts background image -->
 <div class="background"></div>
 
-<!-- Niebla -->
+<!-- Capas de niebla animada / Animated fog layers -->
 <div class="fog fog1"></div>
 <div class="fog fog2"></div>
 
-<!-- Partículas -->
+<!-- Canvas donde se dibujan las partículas mágicas doradas -->
+<!-- Canvas where the golden magic particles are drawn -->
 <canvas id="magicCanvas"></canvas>
 
-<!-- Contenido -->
+<!-- ================= CONTENIDO PRINCIPAL / MAIN CONTENT ================= -->
 <div class="container">
+    <!-- Título principal de la aplicación / Main application title -->
     <h1 class="title">Harry Potter Quiz</h1>
+
+    <!-- Subtítulo descriptivo / Descriptive subtitle -->
     <p class="subtitle">Descubre tu verdadera casa en Hogwarts</p>
+
+    <!-- Botón para iniciar el quiz / Button to start the quiz -->
     <a href="/quiz" class="start-button">Comenzar Quiz</a>
+
     <br><br>
+
+    <!-- Botón para acceder al panel de administración -->
+    <!-- Button to access the administration panel -->
     <a href="/admin/login" class="admin-button">Admin</a>
 </div>
 

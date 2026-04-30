@@ -116,7 +116,7 @@ def enviar_respuestas(datos: RespuestaUsuario, db: Session = Depends(get_db)):
     }
 
     # VALIDACIÓN Y SUMA DE PUNTOS
-
+    #.items() devuelve los pares clave-valor del diccionario a la vez
     for pregunta_id, respuesta_id in respuestas_usuario.items():
         # Buscamos la respuesta en la BD
         respuesta = db.query(models.Respuesta).filter_by(id=respuesta_id).first()
@@ -141,7 +141,7 @@ def enviar_respuestas(datos: RespuestaUsuario, db: Session = Depends(get_db)):
 
     # Obtenemos las casas que tienen esa puntuación
     casas_maximas = [casa for casa, puntos in contador_casas.items() if puntos == max_puntos]
-
+    #items devuelve clave-valor al mismo tiempo
     # Si hay empate → elegimos aleatoriamente
     casa_resultado = random.choice(casas_maximas) if len(casas_maximas) > 1 else casas_maximas[0]
 

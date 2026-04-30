@@ -67,7 +67,7 @@ async def personaje_por_casa(casa: str):
     casa_lower = casa.lower()
     url = f"https://hp-api.onrender.com/api/characters/house/{casa_lower}"
 
-    # httpx.AsyncClient es el cliente HTTP asíncrono
+    # httpx.AsyncClient crea el cliente HTTP asíncrono
     # Mientras espera la respuesta de la API, el servidor puede atender otras peticiones
     async with httpx.AsyncClient() as client:
         try:

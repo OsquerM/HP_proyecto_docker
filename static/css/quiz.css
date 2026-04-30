@@ -1,38 +1,42 @@
 /* ===================== Reset ===================== */
-
+/* Estilos base del body: sin márgenes, fuente mágica y fondo negro */
+/* Body base styles: no margins, magic font and black background */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Cinzel', serif;
     color: white;
     background: black;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Evita scroll horizontal / Prevents horizontal scroll */
 }
 
-/* ===================== Fondo Hogwarts ===================== */
-
+/* ===================== Fondo Hogwarts / Hogwarts background ===================== */
+/* Pseudo-elemento que coloca la imagen de fondo fija con brillo reducido */
+/* Pseudo-element that places a fixed background image with reduced brightness */
 body::before {
     content: "";
     position: fixed;
     width: 100%;
     height: 100%;
     background: url("/static/uploads/hogwarts.jpg") center / cover no-repeat;
-    filter: brightness(0.3);
-    z-index: -2;
+    filter: brightness(0.3); /* Oscurece la imagen para que resalte el contenido / Darkens image so content stands out */
+    z-index: -2; /* imagen de hogwarts */
 }
 
-/* Overlay oscuro mágico */
+/* Overlay oscuro radial que añade profundidad al fondo */
+/* Dark radial overlay that adds depth to the background */
 body::after {
     content: "";
     position: fixed;
     width: 100%;
     height: 100%;
     background: radial-gradient(circle, transparent 20%, black 90%);
-    z-index: -1;
+    z-index: -1; /* overlay oscuro radial encima del fondo */
 }
 
-/* ===================== Título ===================== */
-
+/* ===================== Título / Title ===================== */
+/* Título con efecto de brillo dorado animado */
+/* Title with animated golden glow effect */
 h1 {
     text-align: center;
     font-size: 60px;
@@ -41,9 +45,11 @@ h1 {
         0 0 10px gold,
         0 0 20px orange,
         0 0 40px gold;
-    animation: glow 2s infinite alternate;
+    animation: glow 2s infinite alternate; /* Animación de brillo pulsante / Pulsing glow animation */
 }
 
+/* Animación que alterna entre brillo pequeño y grande */
+/* Animation alternating between small and large glow */
 @keyframes glow {
     from {
         text-shadow:
@@ -58,57 +64,63 @@ h1 {
     }
 }
 
-/* ===================== Formulario ===================== */
-
+/* ===================== Formulario / Form ===================== */
+/* Contenedor del formulario con fondo semitransparente y borde dorado */
+/* Form container with semi-transparent background and golden border */
 form {
     max-width: 900px;
     margin: auto;
     background: rgba(0,0,0,0.7);
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(255,215,0,0.4);
+    box-shadow: 0 0 20px rgba(255,215,0,0.4); /* Sombra dorada / Golden shadow */
 }
 
-/* ===================== Input nombre ===================== */
-
+/* ===================== Input nombre / Name input ===================== */
+/* Campo de texto para el nombre del usuario */
+/* Text field for the user's name */
 input[type="text"] {
     padding: 10px;
     font-size: 18px;
     border-radius: 8px;
     border: none;
     outline: none;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.1); /* Fondo semitransparente / Semi-transparent background */
     color: white;
     margin-top: 10px;
     margin-bottom: 20px;
 }
 
-/* ===================== Preguntas ===================== */
-
+/* ===================== Preguntas / Questions ===================== */
+/* Contenedor de cada pregunta con fondo semitransparente */
+/* Container for each question with semi-transparent background */
 .pregunta {
     margin-bottom: 30px;
     padding: 20px;
     background: rgba(255,255,255,0.05);
     border-radius: 12px;
-    transition: 0.3s;
+    transition: 0.3s; /* Transición suave para el hover / Smooth transition for hover */
 }
 
+/* Efecto hover en las preguntas / Question hover effect */
 .pregunta:hover {
     background: rgba(255,255,255,0.1);
-    box-shadow: 0 0 15px rgba(255,215,0,0.3);
+    box-shadow: 0 0 15px rgba(255,215,0,0.3); /* Brillo dorado / Golden glow */
 }
 
-/* ===================== Grid opciones ===================== */
-
+/* ===================== Grid opciones / Options grid ===================== */
+/* Grid responsivo que distribuye las opciones de respuesta automáticamente */
+/* Responsive grid that automatically distributes answer options */
 .opciones-imagenes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Columnas automáticas mínimo 150px / Auto columns minimum 150px */
     gap: 15px;
     margin-top: 10px;
 }
 
-/* ===================== Opción ===================== */
-
+/* ===================== Opción / Option ===================== */
+/* Tarjeta de cada opción de respuesta */
+/* Card for each answer option */
 .opcion {
     text-align: center;
     padding: 10px;
@@ -118,35 +130,40 @@ input[type="text"] {
     transition: 0.3s;
 }
 
+/* Efecto hover en las opciones / Option hover effect */
 .opcion:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Escala ligeramente al pasar el ratón / Slightly scales on mouse over */
     box-shadow: 0 0 15px rgba(255,215,0,0.5);
 }
 
-/* ===================== Imágenes ===================== */
-
+/* ===================== Imágenes / Images ===================== */
+/* Imágenes de las opciones de respuesta con altura fija */
+/* Answer option images with fixed height */
 .opcion img {
     width: 100%;
     height: 120px;
-    object-fit: cover;
+    object-fit: cover; /* Recorta la imagen para que encaje / Crops image to fit */
     border-radius: 10px;
     transition: 0.3s;
 }
 
+/* Efecto hover en las imágenes / Image hover effect */
 .opcion img:hover {
     transform: scale(1.08);
     box-shadow: 0 0 20px gold;
 }
 
 /* ===================== Radio ===================== */
-
+/* Botón radio ligeramente más grande para mejor usabilidad */
+/* Slightly larger radio button for better usability */
 input[type="radio"] {
     margin-top: 8px;
     transform: scale(1.2);
 }
 
-/* ===================== Botón ===================== */
-
+/* ===================== Botón / Button ===================== */
+/* Botón de envío con gradiente y efecto hover */
+/* Submit button with gradient and hover effect */
 button {
     display: block;
     margin: auto;
@@ -155,12 +172,14 @@ button {
     font-size: 20px;
     border-radius: 12px;
     border: none;
-    background: linear-gradient(45deg, #6b3bff, #ff3b8c);
+    background: linear-gradient(45deg, #6b3bff, #ff3b8c); /* Gradiente morado-rosa / Purple-pink gradient */
     color: white;
     cursor: pointer;
     transition: 0.3s;
 }
 
+/* Efecto hover del botón con brillo dorado y morado */
+/* Button hover effect with golden and purple glow */
 button:hover {
     transform: scale(1.1);
     box-shadow:
@@ -168,12 +187,14 @@ button:hover {
         0 0 40px purple;
 }
 
+/* Efecto al pulsar el botón / Button press effect */
 button:active {
     transform: scale(0.95);
 }
 
-/* ===================== Resultado ===================== */
-
+/* ===================== Resultado / Result ===================== */
+/* Área donde se mostrará el resultado del quiz */
+/* Area where the quiz result will be displayed */
 #resultado {
     text-align: center;
     font-size: 24px;
@@ -181,8 +202,9 @@ button:active {
     text-shadow: 0 0 10px gold;
 }
 
-/* ===================== Botón volver atrás ===================== */
-
+/* ===================== Botón volver atrás / Back button ===================== */
+/* Botón para volver a la página anterior */
+/* Button to go back to the previous page */
 .back-btn {
     display: block;
     margin: 40px 0 0 20px;
@@ -195,9 +217,10 @@ button:active {
     font-weight: bold;
     font-size: 1.1rem;
     transition: all 0.3s;
-    width: fit-content;
+    width: fit-content; /* Solo ocupa el ancho necesario / Only takes needed width */
 }
 
+/* Efecto hover del botón volver / Back button hover effect */
 .back-btn:hover {
     transform: scale(1.05);
     background: linear-gradient(45deg, #6a6a6a, #8a8a8a);
@@ -205,76 +228,84 @@ button:active {
 }
 
 /* ===================== Navbar ===================== */
-
+/* Barra de navegación fija en la parte superior */
+/* Fixed navigation bar at the top */
 .navbar {
     display: flex;
     align-items: center;
     padding: 20px;
     background: rgba(0,0,0,0.6);
-    border-bottom: 2px solid gold;
-    position: sticky;
+    border-bottom: 2px solid gold; /* Borde inferior dorado / Golden bottom border */
+    position: sticky; /* Se queda pegada al scroll / Sticks on scroll */
     top: 0;
-    z-index: 1000;
+    z-index: 1000; /* Por encima de todos los elementos / Above all elements */
 }
-/* ===================== Selección de opción (JS) ===================== */
 
+/* ===================== Selección de opción (JS) / Option selection (JS) ===================== */
+/* Estilo aplicado por JavaScript cuando el usuario selecciona una opción */
+/* Style applied by JavaScript when the user selects an option */
 .opcion.seleccionada {
     border: 2px solid gold;
     background: rgba(255,215,0,0.15);
     box-shadow: 0 0 20px gold;
 }
 
-/* ===================== Focus accesibilidad ===================== */
-
+/* ===================== Focus accesibilidad / Accessibility focus ===================== */
+/* Contorno dorado para elementos enfocados con teclado */
+/* Golden outline for keyboard-focused elements */
 input:focus,
 button:focus {
     outline: 2px solid gold;
     outline-offset: 2px;
 }
 
-/* ===================== Feedback input válido/incorrecto ===================== */
-
+/* ===================== Feedback input válido/incorrecto / Valid/invalid input feedback ===================== */
+/* Borde rojo si el campo es inválido / Red border if field is invalid */
 input[type="text"]:invalid {
     border: 2px solid red;
 }
 
+/* Borde verde si el campo es válido / Green border if field is valid */
 input[type="text"]:valid {
     border: 2px solid green;
 }
 
-/* ===================== Responsive (multi-dispositivo) ===================== */
-
+/* ===================== Responsive (multi-dispositivo) / Responsive (multi-device) ===================== */
+/* Ajustes para pantallas pequeñas (móvil) / Adjustments for small screens (mobile) */
 @media (max-width: 768px) {
     h1 {
-        font-size: 35px;
+        font-size: 35px; /* Título más pequeño en móvil / Smaller title on mobile */
     }
 
     form {
-        padding: 15px;
+        padding: 15px; /* Menos padding en móvil / Less padding on mobile */
     }
 
     .opcion img {
-        height: 100px;
+        height: 100px; /* Imágenes más pequeñas en móvil / Smaller images on mobile */
     }
 
     button {
-        width: 100%;
+        width: 100%; /* Botón a ancho completo en móvil / Full width button on mobile */
     }
 }
 
-/* ===================== Animación suave ===================== */
-
+/* ===================== Animación suave / Smooth animation ===================== */
+/* Animación de entrada para cada pregunta */
+/* Fade-in animation for each question */
 .pregunta {
     animation: fadeIn 0.5s ease-in;
 }
 
+/* Las preguntas aparecen suavemente desde abajo */
+/* Questions smoothly appear from below */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(10px); /* Empieza 10px más abajo / Starts 10px lower */
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0); /* Llega a su posición final / Reaches final position */
     }
 }

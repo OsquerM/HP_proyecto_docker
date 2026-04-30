@@ -74,7 +74,7 @@ input[type="file"] {
 
     background: #020617;
     color: white;
-
+    /*Sombra interior (de dentro a fuera)*/
     box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
 }
 

@@ -50,3 +50,16 @@ body {
 .login-box a button:hover {
     background-color: #301060;
 }
+/* MENSAJE DE ERROR - Login */
+.login-box .error-message {
+    color: black !important;
+    background-color: #fee2e2;
+    border: 2px solid #ef4444;
+    padding: 14px 16px;
+    border-radius: 8px;
+    margin: 15px 0 20px 0;
+    font-weight: bold;
+    font-size: 15.5px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}

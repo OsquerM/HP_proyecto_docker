@@ -3,21 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Editar Pregunta - Harry Potter Quiz</title>
+    <!-- Hoja de estilos del panel admin / Admin panel stylesheet -->
     <link rel="stylesheet" href="/static/css/admin.css">
 </head>
 <body>
     <h1>Editar Pregunta</h1>
 
+    <!-- Formulario de edición de pregunta -->
+    <!-- La action apunta a la ruta del backend con el id de la pregunta -->
+    <!-- Edit question form -->
+    <!-- The action points to the backend route with the question id -->
     <form action="/admin/editar_pregunta/{{ pregunta.id }}" method="post" enctype="multipart/form-data">
+
+        <!-- Campo de texto con el texto actual de la pregunta precargado -->
+        <!-- Text field with the current question text preloaded -->
         <label>Texto de la pregunta:</label>
         <input type="text" name="texto_pregunta" value="{{ pregunta.texto_pregunta }}" required><br><br>
 
+        <!-- Bucle Jinja2 que recorre las respuestas actuales de la pregunta -->
+        <!-- loop.index empieza en 1 (no en 0 como range) -->
+        <!-- Jinja2 loop that iterates through the current question answers -->
+        <!-- loop.index starts at 1 (not 0 like range) -->
         {% for r in pregunta.respuestas %}
             <h3>Respuesta {{ loop.index }}</h3>
 
+            <!-- Campo de texto con el texto actual de la respuesta precargado -->
+            <!-- Text field with the current answer text preloaded -->
             <label>Texto:</label>
             <input type="text" name="respuesta{{ loop.index }}" value="{{ r.texto_respuesta }}" required>
 
+            <!-- Selector de casa con la casa actual seleccionada -->
+            <!-- Si r.casa coincide con la opción, añade el atributo "selected" -->
+            <!-- House selector with the current house preselected -->
+            <!-- If r.casa matches the option, adds the "selected" attribute -->
             <label>Casa:</label>
             <select name="casa{{ loop.index }}">
                 <option value="Gryffindor" {% if r.casa=="Gryffindor" %}selected{% endif %}>Gryffindor</option>
@@ -26,18 +44,29 @@
                 <option value="Hufflepuff" {% if r.casa=="Hufflepuff" %}selected{% endif %}>Hufflepuff</option>
             </select>
 
+            <!-- Si la respuesta tiene imagen, la mostramos como vista previa -->
+            <!-- If the answer has an image, we show it as a preview -->
             {% if r.imagen %}
                 <p>Imagen actual:</p>
                 <img src="/static/{{ r.imagen }}" width="100">
             {% endif %}
 
+            <!-- Campo para subir una nueva imagen (opcional) -->
+            <!-- Si no se sube ninguna, se conserva la imagen actual -->
+            <!-- Field to upload a new image (optional) -->
+            <!-- If no image is uploaded, the current one is kept -->
             <label>Cambiar imagen:</label>
             <input type="file" name="imagen{{ loop.index }}"><br><br>
+
         {% endfor %}
 
+        <!-- Botón para enviar el formulario y guardar los cambios -->
+        <!-- Button to submit the form and save the changes -->
         <button type="submit">Actualizar Pregunta</button>
     </form>
 
+    <!-- Enlace para volver al panel sin guardar cambios -->
+    <!-- Link to go back to the admin panel without saving -->
     <a href="/admin">Volver al panel</a>
 </body>
 </html>
