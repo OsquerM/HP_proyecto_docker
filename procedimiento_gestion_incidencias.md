@@ -1,78 +1,51 @@
-# Procedimiento de Gestión de Incidencias  
-**Proyecto: Sistema de Selección de Casas - Harry Potter**  
-**RA:** 4.c – Procedimiento para la evaluación de incidencias, solución y registro  
-**Fecha de definición:** Marzo 2026  
-**Herramienta principal:** Jira 
+# Procedimiento de Gestión de Incidencias
 
-## 1. Definición del procedimiento
+**Proyecto:** Harry Potter Quiz  
+**RA:** 4.c  
+**Alumno:** Óscar Manuel Benito Martín  
+**Herramienta:** Jira
 
-Las incidencias detectadas durante el desarrollo se registran de forma sistemática en **Jira** (o GitHub Issues) como tipo de issue **Bug** o **Incidencia**.
+---
 
-**Flujo completo de gestión:**
+## 1. Definición del Procedimiento
 
-1. **Detección**  
-   Cualquier miembro del equipo detecta un problema (error funcional, bug visual, fallo de rendimiento, comportamiento inesperado, etc.).
+Durante el desarrollo del proyecto, las incidencias se gestionaron de la siguiente manera:
 
-2. **Registro en Jira**  
-   Se crea un nuevo issue con los siguientes campos obligatorios:
+- **Registro**: Toda incidencia (bug, error o problema) se registraba en Jira como tipo **Bug** o **Incidencia**.
+- **Campos obligatorios**:
+  - Título claro y descriptivo
+  - Descripción detallada con pasos para reproducir
+  - Prioridad (Alta / Media / Baja)
+  - Responsable (Óscar Manuel Benito Martín)
+  - Capturas de pantalla o logs cuando fuera necesario
 
-   - Tipo: **Bug** o **Incidencia**  
-   - Título: Claro y conciso (ej. "Error 500 al enviar respuestas del quiz")  
-   - Descripción:  
-     - Pasos para reproducir  
-     - Comportamiento esperado  
-     - Comportamiento real  
-     - Capturas de pantalla / logs / traceback si aplica  
-   - Prioridad / Severidad:  
-     - Crítica (impide usar la app)  
-     - Alta (funcionalidad importante rota)  
-     - Media (molesto pero no crítico)  
-     - Baja (mejora cosmética o sugerencia)  
-   - Responsable: Asignado al desarrollador más adecuado  
-   - Etiquetas: frontend, backend, base-datos, docker, accesibilidad, etc.  
-   - Adjuntos: imágenes, logs, etc.
+---
 
-3. **Evaluación**  
-   - Se analiza el impacto (¿afecta a usuarios finales?, ¿impide entrega?, ¿seguridad?)  
-   - Se estima esfuerzo (Story Points o horas aproximadas)  
-   - Se prioriza en el backlog/sprint
+## 2. Flujo de Gestión
 
-4. **Propuesta de solución**  
-   - El responsable comenta la solución técnica propuesta  
-   - Se crea branch si es necesario (ej. `fix/error-500-quiz-submit`)  
-   - Se implementa y prueba localmente
+1. Detección del problema
+2. Creación del ticket en Jira
+3. Análisis y asignación de prioridad
+4. Implementación de la solución
+5. Pruebas locales y en Docker
+6. Cierre del ticket una vez verificado
 
-5. **Resolución y verificación**  
-   - Commit con mensaje claro (ej. "fix: corrige error 500 en /enviar_respuestas")  
-   - Pull Request / Merge con enlace al ticket Jira  
-   - Pruebas manuales + verificación en entorno Docker  
-   - Cierre del ticket solo si:  
-     - Funciona correctamente  
-     - No introduce regresiones  
-     - Se verifica en varios navegadores
+Los tickets siguen el siguiente flujo de estados en Jira:  
+**Open → In Progress → Done**
 
-6. **Cierre**  
-   - Estado: **Done** o **Closed**  
-   - Comentario final: "Verificado en Chrome y Firefox. Imágenes cargan correctamente."
+---
 
-## 2. Evidencias que se comprueban en Jira
+## 3. Ejemplos Reales de Incidencias Gestionadas
 
-- Uso de issues tipo **Bug** o **Incidencia** (no solo tareas genéricas)  
-- Cada incidencia tiene:  
-  - Descripción clara y reproducibles pasos  
-  - Prioridad/Severidad asignada  
-  - Responsable claro  
-  - Comentarios con solución técnica  
-  - Cambio de estado visible: Open → In Progress → Resolved → Closed  
-  - Adjuntos (capturas, logs) cuando sea necesario  
-- Hay incidencias reales registradas durante el desarrollo (no inventadas al final)
+| Bug | Prioridad | Solución | Estado |
+|-----|-----------|----------|--------|
+| Error 500 al crear pregunta con imagen | Alta | Ampliar validación de tipos MIME | Cerrado |
+| Imágenes no cargan en el quiz | Media | Corregir rutas en JS con `window.location.origin` | Cerrado |
+| MariaDB no conecta al iniciar Docker | Alta | Implementar bucle de espera con reintentos en `database.py` | Cerrado |
+| Error "Method Not Allowed" al editar pregunta | Media | Corregir atributo `action` en el formulario HTML | Cerrado |
 
-Ejemplo real de ticket creado:
+---
 
-- Título: "Error 404 al cargar preguntas en /quiz"  
-- Prioridad: Alta  
-- Descripción: "Fetch a /preguntas falla con CORS. Pasos: entrar en /quiz → ver consola"  
-- Solución propuesta: "Cambiar BASE_URL a window.location.origin en quiz.js"  
-- Estado: Closed tras merge y prueba
+## 4. Conclusión
 
-Todo queda trazado en Jira sin necesidad de documento adicional. Este procedimiento se definió en la fase de análisis y diseño y se aplicó durante todo el proyecto.
+Se registraron y resolvieron todas las incidencias detectadas durante el desarrollo. El uso de Jira permitió mantener un seguimiento ordenado, priorizar problemas y documentar las soluciones aplicadas. Cada ticket quedó cerrado tras verificar que la solución funcionaba correctamente en el entorno Docker.

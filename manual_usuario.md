@@ -1,4 +1,4 @@
-# 📗 MANUAL DE USUARIO
+# MANUAL DE USUARIO
 ## Sistema de Selección de Casa - Harry Potter
 
 ---

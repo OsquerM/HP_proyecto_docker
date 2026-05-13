@@ -8,10 +8,11 @@
 - ORM: SQLAlchemy  
 - Plantillas: Jinja2  
 - Contenedores: Docker + Docker Compose  
+- Proxy inverso: Nginx  
 
 ## Proyecto: Sistema de Selección de Casas - Harry Potter
 Autor: Óscar Manuel Benito Martín  
-Tecnologías: FastAPI, Jinja2, SQLAlchemy, MariaDB, HTML, CSS, Docker
+Tecnologías: FastAPI, Jinja2, SQLAlchemy, MariaDB, HTML, CSS, Docker, Nginx
 
 ---
 
@@ -54,6 +55,9 @@ HP_Proyecto_Docker/
 │   ├── js/
 │   └── uploads/         → Imágenes subidas por el administrador
 │
+├── nginx/
+│   └── nginx.conf       → Configuración del proxy inverso
+│
 ├── Dockerfile
 ├── docker-compose.yml
 └── requirements.txt
@@ -69,6 +73,7 @@ HP_Proyecto_Docker/
 - **Jinja2** → Motor de plantillas HTML
 - **HTML/CSS/JavaScript** → Interfaz visual del usuario
 - **Docker + Docker Compose** → Contenedores para despliegue
+- **Nginx** → Proxy inverso que gestiona el tráfico de entrada
 - **bcrypt (passlib)** → Cifrado de contraseñas
 - **httpx** → Cliente HTTP para consumir la API externa
 
@@ -149,7 +154,7 @@ class Respuesta(Base):
 1. El usuario accede a `/quiz` y ve las preguntas cargadas dinámicamente desde la BD.
 2. Selecciona una respuesta por pregunta y escribe su nombre.
 3. Al enviar, el backend cuenta cuántas respuestas corresponden a cada casa.
-4. La casa con más respuestas es la asignada (en caso de empate, se elige la primera).
+4. La casa con más respuestas es la asignada (en caso de empate, se elige aleatoriamente).
 5. Se redirige a `/quiz/resultado` donde se muestra la casa y un personaje famoso de esa casa obtenido de hp-api.onrender.com.
 
 ---
@@ -174,7 +179,42 @@ class Respuesta(Base):
 
 ---
 
-# 9. Ejecución del Proyecto
+# 9. Configuración de Nginx como Proxy Inverso
+
+Nginx actúa como intermediario entre el usuario y la aplicación FastAPI:
+
+```
+Usuario → http://localhost (puerto 80) → Nginx → FastAPI (puerto 8000)
+```
+
+Configuración en `nginx/nginx.conf`:
+
+```nginx
+events {
+    worker_connections 1024;
+}
+
+http {
+    server {
+        listen 80;
+        server_name localhost benito-martin-oscar.proyecto-daw.iesabdera.local;
+
+        client_max_body_size 10M;
+
+        location / {
+            proxy_pass http://hp_quiz_app:8000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    }
+}
+```
+
+---
+
+# 10. Ejecución del Proyecto
 
 ## Con Docker (recomendado)
 
@@ -192,10 +232,10 @@ docker compose down
 docker compose down -v
 ```
 
-## Acceso
+## Acceso con dominio local
 
-- Quiz: http://localhost:8000/quiz
-- Admin: http://localhost:8000/admin/login
+- Quiz: http://benito-martin-oscar.proyecto-daw.iesabdera.local
+- Admin: http://benito-martin-oscar.proyecto-daw.iesabdera.local/admin/login
 
 ## Sin Docker (desarrollo local)
 
@@ -206,18 +246,96 @@ uvicorn app.main:app --reload
 
 ---
 
-# 10. Despliegue con Docker
+# 11. Despliegue en un PC Nuevo
 
-El `docker-compose.yml` define dos servicios:
+Pasos para levantar el proyecto en cualquier máquina desde cero:
+
+## Requisitos previos
+
+- Docker Desktop instalado (https://www.docker.com/products/docker-desktop)
+- Git instalado (https://git-scm.com/download/win)
+
+## Pasos
+
+**1. Instalar Docker Desktop y Git**
+
+**2. Clonar el repositorio:**
+```bash
+git clone https://github.com/OsquerM/HP_proyecto_docker.git
+cd HP_proyecto_docker
+```
+
+**3. Crear la carpeta de uploads:**
+```bash
+mkdir -p static/uploads
+```
+
+**4. Añadir el dominio al archivo hosts** (abrir como administrador):
+```
+C:\Windows\System32\drivers\etc\hosts
+```
+Añadir al final:
+```
+127.0.0.1   benito-martin-oscar.proyecto-daw.iesabdera.local
+```
+
+**5. Levantar el proyecto:**
+```bash
+docker compose up --build -d
+```
+
+**6. Crear el usuario admin (solo la primera vez):**
+```bash
+docker exec hp_quiz_app python crear_admin.py
+```
+
+**7. Acceder a la aplicación:**
+```
+http://benito-martin-oscar.proyecto-daw.iesabdera.local
+http://benito-martin-oscar.proyecto-daw.iesabdera.local/admin/login
+```
+
+---
+
+# 12. Comandos útiles de Docker
+
+```bash
+# Ver estado de los contenedores
+docker compose ps
+
+# Ver logs en tiempo real
+docker compose logs hp_quiz_app -f
+
+# Reiniciar contenedores
+docker compose restart
+
+# Parar sin borrar datos
+docker compose down
+
+# Borrar imagen para reconstruir desde cero
+docker compose down
+docker rmi hp_proyecto_docker-hp_quiz_app
+docker compose up --build -d
+
+# Entrar dentro del contenedor
+docker exec -it hp_quiz_app bash
+```
+
+---
+
+# 13. Despliegue con Docker
+
+El `docker-compose.yml` define tres servicios:
 
 - **hp_mariadb**: base de datos MariaDB con volumen persistente para los datos.
 - **hp_quiz_app**: aplicación FastAPI construida desde el Dockerfile, con volumen para las imágenes subidas.
+- **hp_nginx**: proxy inverso Nginx que recibe el tráfico del usuario y lo redirige a FastAPI.
 
 Las variables de entorno (`DB_HOST`, `DB_USER`, etc.) se pasan al contenedor de la app para la conexión a la BD.
 
 ---
 
-# 11. Pruebas Realizadas
+# 14. Pruebas Realizadas
 
 | Prueba | Resultado |
 |--------|-----------|
@@ -232,3 +350,5 @@ Las variables de entorno (`DB_HOST`, `DB_USER`, etc.) se pasan al contenedor de 
 | API externa HP-API (personaje con imagen) | ✅ OK |
 | Compatibilidad navegadores | ✅ Chrome, Edge |
 | Persistencia de imágenes tras reinicio Docker | ✅ OK (volumen montado) |
+| Acceso por dominio local | ✅ OK (benito-martin-oscar.proyecto-daw.iesabdera.local) |
+| Proxy inverso Nginx | ✅ OK (redirige puerto 80 → 8000) |

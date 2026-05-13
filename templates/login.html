@@ -2,24 +2,48 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <!-- Título de la página de login del administrador -->
+    <!-- Title of the admin login page -->
     <title>Login Admin - Harry Potter Quiz</title>
+    
+    <!-- Hoja de estilos general del panel admin -->
+    <!-- General stylesheet for the admin panel -->
     <link rel="stylesheet" href="/static/css/admin.css">
+    
+    <!-- Hoja de estilos específica para la página de login -->
+    <!-- Specific stylesheet for the login page -->
     <link rel="stylesheet" href="/static/css/login.css">
 </head>
 <body>
     <div class="login-box">
+        <!-- Título del formulario de login -->
+        <!-- Login form title -->
         <h1>Admin Login</h1>
 
-        <!-- Mensaje de error -->
+        <!-- Mensaje de error (se muestra solo si hay error en las credenciales) -->
+        <!-- Error message (shown only if credentials are incorrect) -->
         {% if error %}
-        <p class="error-message">❌ Usuario o contraseña incorrectos</p>
+        <p class="error-message">Usuario o contraseña incorrectos</p>
         {% endif %}
 
+        <!-- Formulario de login que envía los datos al endpoint /admin/login -->
+        <!-- Login form that sends data to /admin/login endpoint -->
         <form action="/admin/login" method="post">
+            <!-- Campo para el nombre de usuario -->
+            <!-- Username input field -->
             <input type="text" name="username" placeholder="Usuario" required><br>
+            
+            <!-- Campo para la contraseña -->
+            <!-- Password input field -->
             <input type="password" name="password" placeholder="Contraseña" required><br>
+            
+            <!-- Botón para enviar el formulario -->
+            <!-- Submit button -->
             <button type="submit">Entrar</button>
         </form>
+        
+        <!-- Botón para volver a la página principal -->
+        <!-- Button to return to the home page -->
         <a href="/"><button type="button">Volver al inicio</button></a>
     </div>
 </body>

@@ -2,40 +2,48 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <!-- Título de la página de edición de pregunta -->
+    <!-- Title of the question editing page -->
     <title>Editar Pregunta - Harry Potter Quiz</title>
-    <!-- Hoja de estilos del panel admin / Admin panel stylesheet -->
+    
+    <!-- Hoja de estilos del panel de administración -->
+    <!-- Admin panel stylesheet -->
     <link rel="stylesheet" href="/static/css/admin.css">
 </head>
 <body>
+    <!-- Título principal de la página -->
+    <!-- Main page title -->
     <h1>Editar Pregunta</h1>
 
-    <!-- Formulario de edición de pregunta -->
-    <!-- La action apunta a la ruta del backend con el id de la pregunta -->
-    <!-- Edit question form -->
-    <!-- The action points to the backend route with the question id -->
-    <form action="/admin/editar_pregunta/{{ pregunta.id }}" method="post" enctype="multipart/form-data">
+    <!-- 
+        Formulario para actualizar la pregunta 
+        IMPORTANTE: La ruta debe coincidir exactamente con el endpoint del backend
+    -->
+    <!-- 
+        Form to update the question
+        IMPORTANT: The action must match exactly with the backend endpoint
+    -->
+    <form action="/admin/actualizar_pregunta/{{ pregunta.id }}" 
+          method="post" 
+          enctype="multipart/form-data">
 
-        <!-- Campo de texto con el texto actual de la pregunta precargado -->
-        <!-- Text field with the current question text preloaded -->
+        <!-- Campo para editar el texto de la pregunta -->
+        <!-- Field to edit the question text -->
         <label>Texto de la pregunta:</label>
         <input type="text" name="texto_pregunta" value="{{ pregunta.texto_pregunta }}" required><br><br>
 
-        <!-- Bucle Jinja2 que recorre las respuestas actuales de la pregunta -->
-        <!-- loop.index empieza en 1 (no en 0 como range) -->
-        <!-- Jinja2 loop that iterates through the current question answers -->
-        <!-- loop.index starts at 1 (not 0 like range) -->
+        <!-- Bucle que recorre las 4 respuestas existentes de la pregunta -->
+        <!-- Loop that iterates through the 4 existing answers of the question -->
         {% for r in pregunta.respuestas %}
             <h3>Respuesta {{ loop.index }}</h3>
 
-            <!-- Campo de texto con el texto actual de la respuesta precargado -->
-            <!-- Text field with the current answer text preloaded -->
+            <!-- Campo para editar el texto de cada respuesta -->
+            <!-- Field to edit each answer's text -->
             <label>Texto:</label>
             <input type="text" name="respuesta{{ loop.index }}" value="{{ r.texto_respuesta }}" required>
 
-            <!-- Selector de casa con la casa actual seleccionada -->
-            <!-- Si r.casa coincide con la opción, añade el atributo "selected" -->
-            <!-- House selector with the current house preselected -->
-            <!-- If r.casa matches the option, adds the "selected" attribute -->
+            <!-- Selector para cambiar la casa asociada a la respuesta -->
+            <!-- Selector to change the house associated with the answer -->
             <label>Casa:</label>
             <select name="casa{{ loop.index }}">
                 <option value="Gryffindor" {% if r.casa=="Gryffindor" %}selected{% endif %}>Gryffindor</option>
@@ -44,29 +52,27 @@
                 <option value="Hufflepuff" {% if r.casa=="Hufflepuff" %}selected{% endif %}>Hufflepuff</option>
             </select>
 
-            <!-- Si la respuesta tiene imagen, la mostramos como vista previa -->
-            <!-- If the answer has an image, we show it as a preview -->
+            <!-- Muestra la imagen actual si existe -->
+            <!-- Shows current image if it exists -->
             {% if r.imagen %}
                 <p>Imagen actual:</p>
                 <img src="/static/{{ r.imagen }}" width="100">
             {% endif %}
 
             <!-- Campo para subir una nueva imagen (opcional) -->
-            <!-- Si no se sube ninguna, se conserva la imagen actual -->
             <!-- Field to upload a new image (optional) -->
-            <!-- If no image is uploaded, the current one is kept -->
             <label>Cambiar imagen:</label>
             <input type="file" name="imagen{{ loop.index }}"><br><br>
 
         {% endfor %}
 
-        <!-- Botón para enviar el formulario y guardar los cambios -->
-        <!-- Button to submit the form and save the changes -->
+        <!-- Botón para guardar los cambios -->
+        <!-- Button to save changes -->
         <button type="submit">Actualizar Pregunta</button>
     </form>
 
-    <!-- Enlace para volver al panel sin guardar cambios -->
-    <!-- Link to go back to the admin panel without saving -->
+    <!-- Enlace para volver al panel principal sin guardar cambios -->
+    <!-- Link to return to the main panel without saving changes -->
     <a href="/admin">Volver al panel</a>
 </body>
 </html>

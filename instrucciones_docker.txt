@@ -40,3 +40,35 @@ docker compose up --build -d
 # Entrar dentro del contenedor
 docker exec -it hp_quiz_app bash
 
+======================
+1. Instalar Docker Desktop y Git
+2. Clonar el repositorio:
+bashgit clone https://github.com/OsquerM/HP_proyecto_docker.git
+cd HP_proyecto_docker
+3. Crear la carpeta de uploads:
+bashmkdir -p static/uploads
+4. Añadir el dominio al archivo hosts (como administrador):
+C:\Windows\System32\drivers\etc\hosts
+Añadir al final:
+127.0.0.1   benito-martin-oscar.proyecto-daw.iesabdera.local
+5. Levantar el proyecto:
+bashdocker compose up --build -d
+6. Crear el admin:
+bashdocker exec hp_quiz_app python crear_admin.py
+7. Acceder:
+http://benito-martin-oscar.proyecto-daw.iesabdera.local
+http://benito-martin-oscar.proyecto-daw.iesabdera.local/admin/login
+
+Pasos para el archivo hosts
+1. Busca el Bloc de notas en el menú inicio, haz clic derecho y selecciona "Ejecutar como administrador"
+2. En el Bloc de notas ve a:
+Archivo → Abrir
+3. Navega a esta ruta:
+C:\Windows\System32\drivers\etc\
+4. Cambia el filtro de archivos a "Todos los archivos (.)" para que aparezca el archivo hosts
+5. Abre el archivo hosts
+6. Añade esta línea al final:
+127.0.0.1   benito-martin-oscar.proyecto-daw.iesabdera.local
+7. Guarda con Ctrl+S
+8. Verifica que funciona abriendo el navegador en:
+http://benito-martin-oscar.proyecto-daw.iesabdera.local

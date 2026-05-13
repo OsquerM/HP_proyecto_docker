@@ -3,32 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>¡Felicidades!</title>
+    
+    <!-- Enlace a la hoja de estilos con versión para evitar caché -->
+    <!-- Link to stylesheet with version to avoid cache -->
     <link rel="stylesheet" href="/static/css/resultado.css?v=2">
+    
+    <!-- Cargamos el script de JavaScript de forma diferida (defer) -->
+    <!-- Load JavaScript file with defer (executes after HTML parsing) -->
     <script src="/static/js/quiz.js" defer></script>
 </head>
 
 <body>
 
 <div class="container">
+    <!-- Título principal con el nombre del usuario (inyectado por Jinja2) -->
+    <!-- Main title with user's name (injected by Jinja2) -->
     <h1>¡Felicidades, {{ nombre }}!</h1>
+    
+    <!-- Muestra la casa asignada -->
+    <!-- Displays the assigned house -->
     <p>Has sido asignado a <strong>{{ casa }}</strong> 🏰</p>
 
     <div class="resultado-grid">
-        <!-- Columna izquierda: imagen de la casa -->
+        
+        <!-- Columna izquierda: Imagen de la casa -->
+        <!-- Left column: House image -->
         <div class="columna-casa">
-            <h3 class="titulo_casa ">¡Tu casa <br> de Hogwarts!</h3>
+            <h3 class="titulo_casa">¡Tu casa <br> de Hogwarts!</h3>
+            <!-- Imagen de la casa (ruta inyectada por Jinja2) -->
+            <!-- House image (path injected by Jinja2) -->
             <img src="/static/{{ imagen_casa }}" alt="{{ casa }}" class="casa-img">
             <p><strong>{{ casa }}</strong></p>
         </div>
 
-        <!-- Columna derecha: personaje de HP-API -->
+        <!-- Columna derecha: Personaje de la HP-API (rellenado por JavaScript) -->
+        <!-- Right column: Character from HP-API (filled by JavaScript) -->
         <div class="columna-personaje" id="personaje-container"></div>
     </div>
 
+    <!-- Botón para volver a hacer el quiz -->
+    <!-- Button to restart the quiz -->
     <a href="/quiz" class="restart-button">Volver a hacer el quiz</a>
 </div>
 
-<!-- Variable inyectada por Jinja2 para que quiz.js pueda leer la casa -->
+<!-- Variable inyectada por Jinja2 para que quiz.js pueda leer la casa asignada -->
+<!-- Variable injected by Jinja2 so quiz.js can read the assigned house -->
 <script>
     const CASA_ASIGNADA = "{{ casa }}";
 </script>

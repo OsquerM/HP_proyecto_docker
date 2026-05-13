@@ -31,7 +31,8 @@ async function cargarPreguntas() {
             throw new Error(`Error ${res.status}: ${res.statusText}`);
         }
 
-        // Convertimos la respuesta JSON que manda el backend a un objeto JavaScript para poder manipular los datos y construir el HTML dinámicamente
+        // Convertimos la respuesta JSON que manda el backend a un objeto JavaScript para poder manipular los datos 
+        // y construir el HTML dinámicamente
         const data = await res.json();
         console.log("Preguntas recibidas:", data);
 

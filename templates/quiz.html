@@ -4,16 +4,25 @@
     <meta charset="UTF-8">
     <title>Harry Potter Quiz</title>
 
+    <!-- Enlace a la hoja de estilos CSS del quiz -->
+    <!-- Link to the quiz stylesheet -->
     <link rel="stylesheet" href="/static/css/quiz.css">
+    
+    <!-- Cargamos el script JavaScript de forma diferida (defer) para mejorar el rendimiento -->
+    <!-- Load JavaScript file with defer to improve page loading performance -->
     <script src="/static/js/quiz.js" defer></script>
 
 </head>
 <body>
 
+    <!-- Título principal de la página -->
+    <!-- Main title of the page -->
     <h1>Harry Potter Quiz</h1>
 
     <form id="quizForm">
 
+        <!-- Etiqueta y campo para introducir el nombre del jugador -->
+        <!-- Label and input field for the player's name -->
         <label for="usuario">Nombre:</label>
         <input 
             type="text" 
@@ -24,13 +33,20 @@
         >
         <br><br>
 
-        <div id="preguntas" aria-live="polite"></div>
+        <!-- Contenedor donde JavaScript insertará dinámicamente las preguntas -->
+        <!-- Container where JavaScript will dynamically insert the questions -->
+        <div id="preguntas" aria-live="polite"></div> 
+        <!-- polite Se usa para que las personas con discapacidad visual sepan cuando las preguntas se han cargado en la página -->
+        <!-- polite is used so that people with visual disabilities know when the questions have been loaded on the page -->
 
+        <!-- Botón para enviar las respuestas del quiz -->
+        <!-- Button to submit the quiz answers -->
         <button type="submit">Enviar Respuestas</button>
 
     </form>
 
     <!-- Botón Volver al inicio -->
+    <!-- Button to return to the home page -->
     <button 
         class="back-btn" 
         onclick="window.location.href = '/'"
@@ -38,9 +54,6 @@
     >
         Volver al inicio
     </button>
-    
-    <!-- Zona de mensajes -->
-    <div id="resultado" aria-live="polite"></div>
 
 </body>
 </html>

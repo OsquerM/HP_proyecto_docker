@@ -1,64 +1,64 @@
-/* ===== FONDO GENERAL ===== */
+/* ===== FONDO GENERAL / GENERAL BACKGROUND ===== */
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, #0f172a, #1e293b, #020617);
-    color: #f1f5f9;
+    font-family: 'Segoe UI', Arial, sans-serif;     /* Fuente principal del sitio */
+    background: linear-gradient(135deg, #0f172a, #1e293b, #020617); /* Fondo degradado oscuro */
+    color: #f1f5f9;                                 /* Color de texto por defecto (blanco azulado) */
     margin: 0;
     padding: 20px;
 }
 
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR / NAVIGATION BAR ===== */
 .admin-navbar {
     display: flex;
-    justify-content: flex-end;
-    background: rgba(15, 23, 42, 0.9);
+    justify-content: flex-end;                      /* Alinea el contenido a la derecha */
+    background: rgba(15, 23, 42, 0.9);              /* Fondo semi-transparente oscuro */
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 20px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);           /* Sombra suave */
 }
 
 .logout-button {
-    background: linear-gradient(45deg, #dc2626, #7f1d1d);
+    background: linear-gradient(45deg, #dc2626, #7f1d1d); /* Gradiente rojo oscuro */
     color: white;
     padding: 10px 18px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    transition: 0.3s;
+    transition: 0.3s;                               /* Transición suave al pasar el mouse */
 }
 
 .logout-button:hover {
-    background: linear-gradient(45deg, #ef4444, #991b1b);
-    transform: scale(1.05);
+    background: linear-gradient(45deg, #ef4444, #991b1b); /* Gradiente rojo más claro al hover */
+    transform: scale(1.05);                             /* Efecto de agrandado suave */
 }
 
-/* ===== TITULOS ===== */
+/* ===== TITULOS / HEADINGS ===== */
 
 h1 {
     text-align: center;
     font-size: 36px;
     margin-bottom: 30px;
-    color: #facc15;
-    text-shadow: 0 0 10px rgba(250,204,21,0.7);
+    color: #facc15;                                     /* Color dorado */
+    text-shadow: 0 0 10px rgba(250,204,21,0.7);         /* Brillo dorado alrededor del texto */
 }
 
 h2 {
     margin-top: 40px;
-    color: #38bdf8;
+    color: #38bdf8;                                     /* Color azul claro */
 }
 
-/* ===== FORMULARIO ===== */
+/* ===== FORMULARIO / FORM ===== */
 
 form {
-    background: rgba(15, 23, 42, 0.85);
+    background: rgba(15, 23, 42, 0.85);                 /* Fondo semi-transparente */
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);               /* Sombra fuerte */
     margin-bottom: 20px;
 }
 
-/* INPUTS */
+/* INPUTS / INPUT FIELDS */
 
 input[type="text"],
 select,
@@ -72,16 +72,15 @@ input[type="file"] {
     border-radius: 8px;
     border: none;
 
-    background: #020617;
-    color: white;
-    /*Sombra interior (de dentro a fuera)*/
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+    background: #020617;                                /* Fondo muy oscuro */
+    color: white;                                       /* Texto blanco */
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.8);          /* Sombra interna (efecto hundido) */
 }
 
-/* BOTONES */
+/* BOTONES / BUTTONS */
 
 button {
-    background: linear-gradient(45deg, #2563eb, #1e40af);
+    background: linear-gradient(45deg, #2563eb, #1e40af); /* Gradiente azul */
     border: none;
     padding: 10px 18px;
     border-radius: 8px;
@@ -92,53 +91,53 @@ button {
 }
 
 button:hover {
-    background: linear-gradient(45deg, #3b82f6, #1d4ed8);
-    transform: scale(1.05);
+    background: linear-gradient(45deg, #3b82f6, #1d4ed8); /* Gradiente azul más claro al hover */
+    transform: scale(1.05);                               /* Efecto de agrandado */
 }
 
-/* ===== PREGUNTAS ===== */
+/* ===== PREGUNTAS / QUESTIONS ===== */
 
 .pregunta-admin {
 
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(15, 23, 42, 0.9);                  /* Fondo semi-transparente oscuro */
     padding: 15px;
     border-radius: 12px;
 
     margin-bottom: 15px;
 
-    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);               /* Sombra */
 }
 
-/* BOTON EDITAR */
+/* BOTON EDITAR / EDIT BUTTON */
 
 .pregunta-admin a {
 
     margin-left: 15px;
     margin-right: 10px;
 
-    color: #facc15;
+    color: #facc15;                                     /* Color dorado */
     text-decoration: none;
     font-weight: bold;
 }
 
 .pregunta-admin a:hover {
 
-    color: #fde047;
+    color: #fde047;                                     /* Dorado más claro al hover */
 }
 
-/* ===== RESPUESTAS ===== */
+/* ===== RESPUESTAS / ANSWERS ===== */
 
 .respuestas-admin {
 
     display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+    gap: 15px;                                          /* Espacio entre respuestas */
+    flex-wrap: wrap;                                    /* Permite que se bajen de línea */
     margin-top: 10px;
 }
 
 .respuesta {
 
-    background: rgba(2, 6, 23, 0.9);
+    background: rgba(2, 6, 23, 0.9);                    /* Fondo muy oscuro */
 
     padding: 10px;
 
@@ -153,9 +152,8 @@ button:hover {
 
 .respuesta:hover {
 
-    transform: scale(1.05);
-
-    box-shadow: 0 0 15px rgba(59,130,246,0.8);
+    transform: scale(1.05);                             /* Efecto zoom al pasar el mouse */
+    box-shadow: 0 0 15px rgba(59,130,246,0.8);          /* Sombra azul al hover */
 }
 
 .respuesta img {
@@ -164,14 +162,14 @@ button:hover {
     margin-bottom: 5px;
 }
 
-/* ===== LINEA SEPARADORA ===== */
+/* ===== LINEA SEPARADORA / SEPARATOR LINE ===== */
 
 hr {
 
     border: none;
     height: 1px;
 
-    background: linear-gradient(to right, transparent, #38bdf8, transparent);
+    background: linear-gradient(to right, transparent, #38bdf8, transparent); /* Línea con degradado azul */
 
     margin: 30px 0;
 }

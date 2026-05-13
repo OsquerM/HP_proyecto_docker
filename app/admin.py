@@ -361,17 +361,3 @@ async def eliminar_pregunta(
     db.commit()
     return RedirectResponse("/admin?success=pregunta_eliminada", status_code=303)
 
-@admin_router.post("/eliminar_respuesta")
-async def eliminar_respuesta(
-    respuesta_id: int = Form(...),
-    db: Session = Depends(get_db),
-    _ = Depends(get_current_admin)
-):
-    """Elimina una respuesta individual sin borrar la pregunta completa"""
-    respuesta = db.query(models.Respuesta).filter_by(id=respuesta_id).first()
-    if not respuesta:
-        raise HTTPException(404, "Respuesta no encontrada")
-
-    db.delete(respuesta)
-    db.commit()
-    return RedirectResponse("/admin?success=respuesta_eliminada", status_code=303)

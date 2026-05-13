@@ -24,7 +24,7 @@ services:
 
     volumes:
       - db_data:/var/lib/mysql # Los datos de MariaDB persisten aunque el contenedor se destruya
-
+  
   # ─────────────────────────────────────────────────────────────
   # Servicio de la aplicación FastAPI (el quiz)
   # ─────────────────────────────────────────────────────────────
@@ -80,3 +80,14 @@ volumes:
   db_data:
 
 # Los tres servicios tienen restart: always para que se reinicien automáticamente si se caen, y depends_on para que arranquen en el orden correcto — primero MariaDB, luego la app, y finalmente Nginx."
+
+
+# MariaDB          FastAPI              Nginx
+# ────────         ────────             ────────
+# Almacena         Procesa la           Recibe el
+# los datos   ←→  lógica y   ←→       tráfico del
+#              conecta con la BD        usuario
+
+# MariaDB → image + environment (credenciales) + volumes (persistir datos)
+# FastAPI → build + environment (credenciales BD) + expose (puerto interno) + volumes (imágenes)
+# Nginx → image + ports (puerto exterior) + volumes (nginx.conf)

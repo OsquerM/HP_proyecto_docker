@@ -63,7 +63,7 @@ SessionLocal = sessionmaker(
     autoflush=False,    # No hace flush automáticamente
     bind=engine         # Conecta la sesión al engine
 )
-
+#Plantilla que usaran los modelos
 # Base es la clase base que usarán todos nuestros modelos (Usuario, Pregunta, Respuesta)
 Base = declarative_base()
 

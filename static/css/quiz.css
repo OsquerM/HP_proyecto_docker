@@ -111,45 +111,46 @@ input[type="text"] {
 /* ===================== Grid opciones / Options grid ===================== */
 /* Grid responsivo que distribuye las opciones de respuesta automáticamente */
 /* Responsive grid that automatically distributes answer options */
+/* Contenedor de opciones - mejor distribución */
 .opciones-imagenes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Columnas automáticas mínimo 150px / Auto columns minimum 150px */
-    gap: 15px;
-    margin-top: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Mejor tamaño mínimo */
+    gap: 20px;           /* Más espacio entre tarjetas */
+    margin-top: 15px;
 }
 
-/* ===================== Opción / Option ===================== */
-/* Tarjeta de cada opción de respuesta */
-/* Card for each answer option */
+/* Tarjeta de cada opción */
 .opcion {
     text-align: center;
-    padding: 10px;
-    border-radius: 10px;
-    background: rgba(0,0,0,0.5);
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.6);
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    border: 2px solid transparent; /* Para resaltar cuando se selecciona */
 }
 
-/* Efecto hover en las opciones / Option hover effect */
+/* Efecto al pasar el ratón */
 .opcion:hover {
-    transform: scale(1.05); /* Escala ligeramente al pasar el ratón / Slightly scales on mouse over */
-    box-shadow: 0 0 15px rgba(255,215,0,0.5);
+    transform: scale(1.06);
+    box-shadow: 0 0 20px rgba(255,215,0,0.6);
+    border-color: gold;
 }
 
 /* ===================== Imágenes / Images ===================== */
-/* Imágenes de las opciones de respuesta con altura fija */
-/* Answer option images with fixed height */
+/* Ajuste mejorado para que las imágenes se vean completas y centradas */
 .opcion img {
     width: 100%;
-    height: 120px;
-    object-fit: cover; /* Recorta la imagen para que encaje / Crops image to fit */
+    height: 140px;           /* Aumenté un poco la altura para que se vea mejor */
+    object-fit: cover;       /* Recorta manteniendo proporción (recomendado) */
+    object-position: center; /* Centra la imagen */
     border-radius: 10px;
     transition: 0.3s;
 }
 
-/* Efecto hover en las imágenes / Image hover effect */
+/* Efecto hover más suave */
 .opcion img:hover {
-    transform: scale(1.08);
+    transform: scale(1.05);
     box-shadow: 0 0 20px gold;
 }
 
