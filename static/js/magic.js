@@ -12,7 +12,7 @@ canvas.height = window.innerHeight;
 let particles = [];
 
 // ─────────────────────────────────────────────────────────────
-// Clase Particle: representa cada partícula mágica (estrellita dorada)
+// Clase Particle: representa cada partícula mágica (estrella dorada)
 // ─────────────────────────────────────────────────────────────
 class Particle {
 

@@ -1,65 +1,73 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: Arial, sans-serif; /* Fuente principal */
+    background-color: #f5f5f5; /* Color de fondo */
+    display: flex; /* Activa flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Altura completa de pantalla */
 }
+
 .login-box {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    width: 350px;
-    text-align: center;
+    background-color: white; /* Fondo blanco */
+    padding: 30px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0,0,0,0.2); /* Sombra */
+    width: 350px; /* Ancho fijo */
+    text-align: center; /* Centra texto */
 }
+
 .login-box h1 {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Espacio inferior */
 }
+
 .login-box input {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    width: 90%; /* Anchura del input */
+    padding: 10px; /* Espaciado interno */
+    margin: 10px 0; /* Separación vertical */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ccc; /* Borde gris */
 }
+
 .login-box button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #4B0082;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    background-color: #4B0082; /* Fondo morado */
+    color: white; /* Texto blanco */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor clicable */
+    margin-top: 10px; /* Separación superior */
 }
+
 .login-box button:hover {
-    background-color: #301060;
+    background-color: #301060; /* Color al pasar ratón */
 }
 
 /* Botón volver */
 .login-box a {
-    display: block;
-    margin-top: 15px;
-    text-decoration: none;
+    display: block; /* Ocupa línea completa */
+    margin-top: 15px; /* Espacio superior */
+    text-decoration: none; /* Sin subrayado */
 }
+
 .login-box a button {
-    background-color: #4B0082;
-    width: auto;
+    background-color: #4B0082; /* Mismo color que principal */
+    width: auto; /* Anchura automática */
 }
+
 .login-box a button:hover {
-    background-color: #301060;
+    background-color: #301060; /* Color hover */
 }
+
 /* MENSAJE DE ERROR - Login */
 .login-box .error-message {
-    color: black !important;
-    background-color: #fee2e2;
-    border: 2px solid #ef4444;
-    padding: 14px 16px;
-    border-radius: 8px;
-    margin: 15px 0 20px 0;
-    font-weight: bold;
-    font-size: 15.5px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    color: black !important; /* Texto negro forzado */
+    background-color: #fee2e2; /* Fondo rojo claro */
+    border: 2px solid #ef4444; /* Borde rojo */
+    padding: 14px 16px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    margin: 15px 0 20px 0; /* Márgenes */
+    font-weight: bold; /* Texto en negrita */
+    font-size: 15.5px; /* Tamaño texto */
+    text-align: center; /* Texto centrado */
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); /* Sombra roja suave */
 }
